@@ -17,7 +17,6 @@ const pointsColor = "#4387D7";
 const boxShadow = "6px 6px #E0453A";
 
 const app = new Frog({
-  debug: true,
   assetsPath: "/",
   basePath: "/api",
   imageAspectRatio: "1:1",
@@ -319,7 +318,7 @@ app.frame("/check", async (c) => {
       </div>
     ),
     // @ts-ignore
-    imageOptions: { width: 1080, height: 1080, debug: true },
+    imageOptions: { width: 1080, height: 1080 },
     intents: [
       <Button value="Back" action="/">
         Back
