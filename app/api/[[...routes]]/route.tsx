@@ -126,124 +126,121 @@ const footerView = (
 // Uncomment to use Edge Runtime
 // export const runtime = "edge";
 
-app.frame(
-  "/",
-  (c: {
-    res: (arg0: { image: JSX.Element; intents: JSX.Element[] }) => any;
-  }) => {
-    return c.res({
-      image: (
+// @ts-ignore
+app.frame("/", (c) => {
+  return c.res({
+    image: (
+      <div
+        style={{
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
+          flexWrap: "nowrap",
+          height: "100%",
+          justifyContent: "center",
+          textAlign: "center",
+          width: "100%",
+          fontFamily: "Nerko One",
+        }}
+      >
         <div
           style={{
-            alignItems: "center",
             display: "flex",
-            flexDirection: "column",
-            flexWrap: "nowrap",
-            height: "100%",
-            justifyContent: "center",
-            textAlign: "center",
-            width: "100%",
-            fontFamily: "Nerko One",
+            position: "absolute",
+            zIndex: "-2",
+            background: "white",
+            borderColor: mainForegroundColor,
+            borderWidth: 15,
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              position: "absolute",
-              zIndex: "-2",
-              background: "white",
-              borderColor: mainForegroundColor,
-              borderWidth: 15,
-            }}
-          >
-            <Image
-              src="/lines.png"
-              width="256"
-              height="256"
-              objectFit="contain"
-            ></Image>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              position: "absolute",
-            }}
-          >
-            <Image
-              src="/vectors.png"
-              width="256"
-              height="256"
-              objectFit="contain"
-            ></Image>
-          </div>
+          <Image
+            src="/lines.png"
+            width="256"
+            height="256"
+            objectFit="contain"
+          ></Image>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            position: "absolute",
+          }}
+        >
+          <Image
+            src="/vectors.png"
+            width="256"
+            height="256"
+            objectFit="contain"
+          ></Image>
+        </div>
 
+        <h1
+          style={{
+            color: "white",
+            fontSize: 100,
+            background: mainForegroundColor,
+            marginTop: 60,
+            paddingTop: 8,
+            paddingBottom: 8,
+            paddingLeft: 32,
+            paddingRight: 32,
+            borderRadius: 120,
+          }}
+        >
+          TN100x LP Points
+        </h1>
+
+        <div style={{ display: "flex" }}>
           <h1
             style={{
-              color: "white",
-              fontSize: 100,
-              background: mainForegroundColor,
-              marginTop: 60,
+              fontSize: 82,
+              color: mainForegroundColor,
+              width: "856",
+              height: "319",
+              background: "white",
+              borderColor: mainForegroundColor,
+              borderRadius: 30,
+              borderWidth: 2,
+              paddingLeft: 80,
+              paddingRight: 80,
               paddingTop: 8,
               paddingBottom: 8,
-              paddingLeft: 32,
-              paddingRight: 32,
-              borderRadius: 120,
+              boxShadow: boxShadow,
             }}
           >
-            TN100x LP Points
+            Check your TN100x LP points from this frame
           </h1>
-
-          <div style={{ display: "flex" }}>
-            <h1
-              style={{
-                fontSize: 82,
-                color: mainForegroundColor,
-                width: "856",
-                height: "319",
-                background: "white",
-                borderColor: mainForegroundColor,
-                borderRadius: 30,
-                borderWidth: 2,
-                paddingLeft: 80,
-                paddingRight: 80,
-                paddingTop: 8,
-                paddingBottom: 8,
-                boxShadow: boxShadow,
-              }}
-            >
-              Check your TN100x LP points from this frame
-            </h1>
-          </div>
-
-          {footerView}
-
-          <div
-            style={{
-              display: "flex",
-              position: "absolute",
-            }}
-          >
-            <Image
-              src="/floaties.png"
-              width="256"
-              height="256"
-              objectFit="contain"
-            ></Image>
-          </div>
         </div>
-      ),
-      // @ts-ignore
-      imageOptions: { width: 1080, height: 1080 },
-      intents: [
-        <TextInput placeholder="Search by FID" />,
-        <Button value="Check" action="/check">
-          Check
-        </Button>,
-      ],
-    });
-  }
-);
 
+        {footerView}
+
+        <div
+          style={{
+            display: "flex",
+            position: "absolute",
+          }}
+        >
+          <Image
+            src="/floaties.png"
+            width="256"
+            height="256"
+            objectFit="contain"
+          ></Image>
+        </div>
+      </div>
+    ),
+    // @ts-ignore
+    imageOptions: { width: 1080, height: 1080 },
+    intents: [
+      <TextInput placeholder="Search by FID" />,
+      <Button value="Check" action="/check">
+        Check
+      </Button>,
+    ],
+  });
+});
+
+// @ts-ignore
 app.frame("/check", async (c) => {
   const { frameData } = c;
 
