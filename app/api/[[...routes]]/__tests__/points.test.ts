@@ -1,6 +1,6 @@
 // points.test.ts
 import { fetchCurrentPoints, fetchAllPoints } from "../client";
-import kv from "@vercel/kv";
+import { kv } from "@vercel/kv";
 
 // Mocking the kv.get and kv.set methods
 jest.mock("@vercel/kv", () => ({

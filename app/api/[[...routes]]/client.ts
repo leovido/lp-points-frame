@@ -1,5 +1,5 @@
 import { LMScore, UserScore } from "./types.js";
-import kv from "@vercel/kv";
+import { kv } from "@vercel/kv";
 
 let rank: number = 0;
 export const fetchLiquidityMiningScore = async (
