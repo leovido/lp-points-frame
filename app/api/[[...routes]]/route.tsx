@@ -17,7 +17,7 @@ const pointsColor = "#4387D7";
 const boxShadow = "6px 6px #E0453A";
 
 const app = new Frog({
-  verify: process.env.CONFIG,
+  verify: process.env.CONFIG === "PROD",
   assetsPath: "/",
   basePath: "/api",
   imageAspectRatio: "1:1",
