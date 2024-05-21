@@ -400,7 +400,13 @@ app.frame("/check", async (c) => {
       </div>
     ),
     // @ts-ignore
-    imageOptions: { width: 1080, height: 1080 },
+    imageOptions: {
+      width: 1080,
+      height: 1080,
+      headers: {
+        "Content-Type": "image/png",
+      },
+    },
     intents: [
       <Button value="Back" action="/">
         Back
