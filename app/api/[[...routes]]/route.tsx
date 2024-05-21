@@ -266,7 +266,7 @@ app.frame("/", (c) => {
     // @ts-ignore
     imageOptions: { width: 1080, height: 1080 },
     intents: [
-      <TextInput placeholder="Search by FID" />,
+      false && <TextInput placeholder="Search by FID" />,
       <Button value="Check" action="/check">
         Check
       </Button>,
@@ -354,7 +354,7 @@ app.frame("/check", async (c) => {
             zIndex: "-2",
             background: "white",
             borderColor: mainForegroundColor,
-            borderWidth: 15,
+            borderWidth: 20,
           }}
         >
           <Image
@@ -431,6 +431,29 @@ const userView = (
         paddingBottom: 8,
       }}
     >
+      <h1
+        style={{
+          position: "absolute",
+          left: "60%",
+          top: -45,
+          transform: "translateX(-60%)", // Changed to translateX for horizontal centering only
+          color: "white",
+          fontFamily: "Instrument Serif",
+          fontSize: 34,
+          background: mainForegroundColor,
+          paddingTop: 8,
+          paddingBottom: 8,
+          display: "flex", // Added display flex for centering text within the element
+          alignItems: "center",
+          justifyContent: "center",
+          width: 200, // Width as a number, not a string
+          height: 52, // Height as a number, not a string
+          borderRadius: 120,
+        }}
+      >
+        Your stats
+      </h1>
+
       <h1
         style={{
           fontSize: 48,
