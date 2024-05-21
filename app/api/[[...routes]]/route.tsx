@@ -9,7 +9,7 @@ import { neynarClient } from "./neynarClient.ts";
 import { handle } from "frog/next";
 import { serveStatic } from "frog/serve-static";
 // @ts-ignore
-import { fetchLiquidityMiningScore } from "./client.ts";
+import { fetchAllPoints, fetchLiquidityMiningScore } from "./client.ts";
 
 const mainForegroundColor = "#E0453A";
 const rankColor = "#F08303";
@@ -184,7 +184,7 @@ app.frame("/", (c) => {
             zIndex: "-2",
             background: "white",
             borderColor: mainForegroundColor,
-            borderWidth: 15,
+            borderWidth: 20,
           }}
         >
           <Image
@@ -286,7 +286,7 @@ app.frame("/check", async (c) => {
   //         style={{
   //           fontFamily: "Open Sans",
   //           alignItems: "center",
-  //           background: '#17101F',
+  //           background: "#17101F",
   //           backgroundSize: "100% 100%",
   //           display: "flex",
   //           flexDirection: "column",
@@ -319,15 +319,26 @@ app.frame("/check", async (c) => {
 
   const formattedDate = formatDate(new Date());
   const fid = frameData?.fid ?? 0;
+
   const user = (await neynarClient.fetchBulkUsers([fid])).users[0];
   const username = user.username;
   const custodyAddress = user.verified_addresses.eth_addresses;
   const liqResponse = await fetchLiquidityMiningScore(1, custodyAddress);
 
+  const _totalPoints = liqResponse?.score ?? 0;
+
+  const { totalPoints: newTotalPoints, todayPoints: newTodaysPoints } =
+    await fetchAllPoints(fid, _totalPoints);
+
   const totalPoints =
-    liqResponse?.score.toLocaleString("en-US", {
+    newTotalPoints.toLocaleString("en-US", {
       maximumFractionDigits: 0,
     }) ?? "N/A";
+  const todayPoints =
+    newTodaysPoints.toLocaleString("en-US", {
+      maximumFractionDigits: 0,
+    }) ?? "N/A";
+
   const rank = liqResponse?.rank.toString() ?? "N/A";
 
   // const pfpURL =
@@ -383,7 +394,7 @@ app.frame("/check", async (c) => {
           TN100x LP Points
         </h1>
 
-        {userView(username, fid, totalPoints, rank)}
+        {userView(username, fid, totalPoints, todayPoints, rank)}
 
         {footerView(formattedDate)}
       </div>
@@ -408,6 +419,7 @@ const userView = (
   username: string,
   fid: number,
   totalPoints: string,
+  todayPoints: string,
   rank: string
 ) => {
   return (
@@ -541,7 +553,7 @@ const userView = (
             color: "#4387D7",
           }}
         >
-          {totalPoints}
+          {todayPoints}
         </h1>
       </div>
       <div

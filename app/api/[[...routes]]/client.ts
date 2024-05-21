@@ -1,4 +1,5 @@
 import { LMScore, UserScore } from "./types.js";
+import kv from "@vercel/kv";
 
 let rank: number = 0;
 export const fetchLiquidityMiningScore = async (
@@ -40,5 +41,30 @@ export const fetchLiquidityMiningScore = async (
     }
   } catch (error) {
     throw new Error(`Failed to fetch liquidity mining score: ${error}`);
+  }
+};
+
+export const fetchCurrentPoints = async (fid: number) => {
+  const userPoints: { totalPoints: number; todaysPoints: number } | null =
+    await kv.get(`${fid}-lp`);
+
+  return userPoints;
+};
+
+export const fetchAllPoints = async (fid: number, lpPoints: number) => {
+  const currentPoints = (await fetchCurrentPoints(fid)) ?? {
+    todayPoints: 0,
+    totalPoints: 0,
+  };
+
+  if (lpPoints !== currentPoints.totalPoints) {
+    const newPoints = {
+      totalPoints: lpPoints,
+      todayPoints: lpPoints - currentPoints.totalPoints,
+    };
+    await kv.set(`${fid}-lp`, newPoints);
+    return newPoints;
+  } else {
+    return currentPoints;
   }
 };
