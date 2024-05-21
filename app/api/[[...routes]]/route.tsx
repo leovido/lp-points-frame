@@ -264,7 +264,13 @@ app.frame("/", (c) => {
       </div>
     ),
     // @ts-ignore
-    imageOptions: { width: 1080, height: 1080 },
+    imageOptions: {
+      width: 1080,
+      height: 1080,
+      headers: {
+        "content-type": "image/png",
+      },
+    },
     intents: [
       false && <TextInput placeholder="Search by FID" />,
       <Button value="Check" action="/check">
