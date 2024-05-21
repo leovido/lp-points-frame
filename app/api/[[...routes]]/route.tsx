@@ -3,7 +3,7 @@
 import { Button, Frog, TextInput } from "frog";
 import { devtools } from "frog/dev";
 // @ts-ignore
-import { Image, Box } from "./ui.js";
+import { Image } from "./ui.js";
 // @ts-ignore
 import { neynarClient } from "./neynarClient.ts";
 import { handle } from "frog/next";
@@ -17,6 +17,7 @@ const pointsColor = "#4387D7";
 const boxShadow = "6px 6px #E0453A";
 
 const app = new Frog({
+  verify: false,
   assetsPath: "/",
   basePath: "/api",
   imageAspectRatio: "1:1",
@@ -28,9 +29,12 @@ const app = new Frog({
         weight: 400,
       },
       {
+        name: "Instrument Serif",
+        source: "google",
+      },
+      {
         name: "Instrument Sans",
         source: "google",
-        weight: 400,
       },
       {
         name: "DM Serif Display",
@@ -49,16 +53,17 @@ const app = new Frog({
   },
 });
 
-const footerView = (
+const footerView = (formattedDate: string) => (
   <div
     style={{
       display: "flex",
       flexDirection: "row",
       width: "850",
       height: "58",
-      bottom: 30,
+      bottom: 74,
       position: "absolute",
       alignItems: "center",
+      alignContent: "center",
       justifyContent: "space-around",
       textAlign: "center",
       borderColor: mainForegroundColor,
@@ -77,12 +82,12 @@ const footerView = (
     >
       <h6
         style={{
-          fontFamily: "Instrument Sans",
+          fontFamily: "Instrument Serif",
           color: mainForegroundColor,
           fontSize: 25,
         }}
       >
-        Design by
+        Design by{"  "}
       </h6>
       <h6
         style={{
@@ -97,26 +102,26 @@ const footerView = (
       style={{
         fontFamily: "Instrument Sans",
         color: mainForegroundColor,
-        fontSize: 25,
+        fontSize: 20,
       }}
     >
-      May 3, 2024, 08:14:15 UTC
+      {formattedDate}
     </h6>
     <div
       style={{
         display: "flex",
         flexDirection: "row",
-        alignContent: "center",
+        alignItems: "center",
       }}
     >
       <h6
         style={{
-          fontFamily: "Instrument Sans",
+          fontFamily: "Instrument Serif",
           color: mainForegroundColor,
           fontSize: 25,
         }}
       >
-        Frame by
+        Frame by{"  "}
       </h6>
       <h6
         style={{
@@ -129,11 +134,35 @@ const footerView = (
     </div>
   </div>
 );
+
+const formatDate = (date: Date) => {
+  const dateFormatter = new Intl.DateTimeFormat("en-CA", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    timeZone: "UTC",
+  });
+
+  const timeFormatter = new Intl.DateTimeFormat("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "UTC",
+    hour12: false,
+  });
+
+  const formattedDate = dateFormatter.format(date);
+  const formattedTime = timeFormatter
+    .format(date)
+    .replace(/^(\d{2}):(\d{2}):(\d{2})$/, "$1:$2");
+
+  return `${formattedDate}, ${formattedTime} UTC`;
+};
 // Uncomment to use Edge Runtime
 // export const runtime = "edge";
 
 // @ts-ignore
 app.frame("/", (c) => {
+  const formattedDate = formatDate(new Date());
   return c.res({
     image: (
       <div
@@ -143,7 +172,6 @@ app.frame("/", (c) => {
           flexDirection: "column",
           flexWrap: "nowrap",
           height: "100%",
-          justifyContent: "center",
           textAlign: "center",
           width: "100%",
           fontFamily: "Nerko One",
@@ -185,7 +213,7 @@ app.frame("/", (c) => {
             color: "white",
             fontSize: 100,
             background: mainForegroundColor,
-            marginTop: 60,
+            marginTop: 246,
             paddingTop: 8,
             paddingBottom: 8,
             paddingLeft: 32,
@@ -218,7 +246,7 @@ app.frame("/", (c) => {
           </h1>
         </div>
 
-        {footerView}
+        {footerView(formattedDate)}
 
         <div
           style={{
@@ -248,15 +276,58 @@ app.frame("/", (c) => {
 
 // @ts-ignore
 app.frame("/check", async (c) => {
-  const { frameData } = c;
+  const { frameData, verified } = c;
 
+  // if (!verified) {
+  //   console.log(`Frame verification failed for ${frameData?.fid}`);
+  //   return c.res({
+  //     image: (
+  //       <div
+  //         style={{
+  //           fontFamily: "Open Sans",
+  //           alignItems: "center",
+  //           background: '#17101F',
+  //           backgroundSize: "100% 100%",
+  //           display: "flex",
+  //           flexDirection: "column",
+  //           flexWrap: "nowrap",
+  //           height: "100%",
+  //           justifyContent: "center",
+  //           textAlign: "center",
+  //           width: "100%",
+  //         }}
+  //       >
+  //         <p
+  //           style={{
+  //             fontFamily: "Open Sans",
+  //             fontWeight: 700,
+  //             fontSize: 45,
+  //             color: "#D6FFF6",
+  //           }}
+  //         >
+  //           Something went wrong
+  //         </p>
+  //       </div>
+  //     ),
+  //     intents: [
+  //       <Button key={"restart"} action="/">
+  //         Restart
+  //       </Button>,
+  //     ],
+  //   });
+  // }
+
+  const formattedDate = formatDate(new Date());
   const fid = frameData?.fid ?? 0;
   const user = (await neynarClient.fetchBulkUsers([fid])).users[0];
   const username = user.username;
   const custodyAddress = user.verified_addresses.eth_addresses;
   const liqResponse = await fetchLiquidityMiningScore(1, custodyAddress);
 
-  const totalPoints = liqResponse?.score.toFixed(0) ?? "N/A";
+  const totalPoints =
+    liqResponse?.score.toLocaleString("en-US", {
+      maximumFractionDigits: 0,
+    }) ?? "N/A";
   const rank = liqResponse?.rank.toString() ?? "N/A";
 
   // const pfpURL =
@@ -314,7 +385,7 @@ app.frame("/check", async (c) => {
 
         {userView(username, fid, totalPoints, rank)}
 
-        {footerView}
+        {footerView(formattedDate)}
       </div>
     ),
     // @ts-ignore
@@ -344,60 +415,51 @@ const userView = (
       style={{
         display: "flex",
         flexDirection: "column",
-        width: 850,
-        height: 303,
-        color: mainForegroundColor,
+        justifyContent: "space-between",
+        width: 857,
+        height: 570,
+        color: "#E0453A",
         background: "white",
-        borderColor: mainForegroundColor,
+        borderColor: "#E0453A",
         borderRadius: 30,
         borderWidth: 2,
-        boxShadow: boxShadow,
+        boxShadow: "6px 6px #E0453A",
         marginTop: 40,
-        paddingLeft: 16,
-        paddingRight: 16,
+        paddingLeft: 55,
+        paddingRight: 55,
         paddingTop: 8,
         paddingBottom: 8,
       }}
     >
+      <h1
+        style={{
+          fontSize: 48,
+          fontFamily: "Instrument Serif",
+          marginLeft: "auto",
+          marginTop: 20,
+          marginBottom: -80,
+        }}
+      >
+        Rank
+      </h1>
       <div
         style={{
           display: "flex",
           flexDirection: "row",
           width: "100%",
           alignItems: "center",
+          alignContent: "center",
         }}
       >
-        {/* <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: 150,
-            height: 150,
-            borderColor: mainForegroundColor,
-            borderWidth: 2,
-            marginRight: 20,
-            marginLeft: 50,
-            borderRadius: 300,
-          }}
-        >
-          <Image
-            src={pfpURL}
-            width={"150"}
-            height={"150"}
-            objectFit={"cover"}
-            borderRadius="100%"
-          ></Image>
-        </div> */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-around",
           }}
         >
           <h1
             style={{
-              fontSize: 64,
+              fontSize: 80,
             }}
           >
             @{username}
@@ -406,7 +468,7 @@ const userView = (
             style={{
               fontFamily: "Instrument Sans",
               marginTop: -24,
-              fontSize: 28,
+              fontSize: 32,
             }}
           >
             {fid}
@@ -414,74 +476,77 @@ const userView = (
         </div>
         <h1
           style={{
+            fontSize: 120,
+            color: "#F08303",
             marginLeft: "auto",
-            fontSize: 96,
-            color: rankColor,
-            marginRight: 50,
           }}
         >
           #{rank}
         </h1>
       </div>
-
+      <p
+        style={{
+          fontFamily: "Instrument Serif",
+          fontSize: 50,
+          color: "#D1BCBB",
+          marginTop: -60,
+          marginBottom: -40,
+          textAlign: "center",
+        }}
+      >
+        ......................................................................
+      </p>
       <div
         style={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-around",
-          width: "100%",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
-        <div
+        <h1
           style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
+            fontFamily: "Instrument Serif",
+            fontSize: 48,
           }}
         >
-          <h1
-            style={{
-              fontFamily: "Instrument Sans",
-              fontSize: 38,
-              paddingRight: 8,
-            }}
-          >
-            Todays points
-          </h1>
-          <h1
-            style={{
-              fontSize: 56,
-              color: pointsColor,
-            }}
-          >
-            {totalPoints}
-          </h1>
-        </div>
-        <div
+          Today's points
+        </h1>
+        <h1
           style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
+            fontSize: 82,
+            color: "#4387D7",
           }}
         >
-          <h1
-            style={{
-              fontFamily: "Instrument Sans",
-              fontSize: 38,
-              paddingRight: 8,
-            }}
-          >
-            Total points
-          </h1>
-          <h1
-            style={{
-              fontSize: 56,
-              color: pointsColor,
-            }}
-          >
-            {totalPoints}
-          </h1>
-        </div>
+          {totalPoints}
+        </h1>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginTop: -90,
+          marginBottom: 40,
+        }}
+      >
+        <h1
+          style={{
+            fontFamily: "Instrument Serif",
+            fontSize: 48,
+          }}
+        >
+          Total points
+        </h1>
+        <h1
+          style={{
+            fontSize: 82,
+            color: "#4387D7",
+          }}
+        >
+          {totalPoints}
+        </h1>
       </div>
     </div>
   );
