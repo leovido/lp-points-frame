@@ -45,7 +45,7 @@ export const fetchLiquidityMiningScore = async (
 };
 
 export const fetchCurrentPoints = async (fid: number) => {
-  const userPoints: { totalPoints: number; todaysPoints: number } | null =
+  const userPoints: { totalPoints: number; todayPoints: number } | null =
     await kv.get(`${fid}-lp`);
 
   return userPoints;
