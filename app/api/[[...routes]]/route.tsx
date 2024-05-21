@@ -366,7 +366,6 @@ app.frame("/check", async (c) => {
         {footerView(formattedDate)}
       </div>
     ),
-    // @ts-ignore
     imageOptions: {
       width: 1080,
       height: 1080,
