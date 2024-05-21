@@ -4,8 +4,10 @@ import { kv } from "@vercel/kv";
 
 // Mocking the kv.get and kv.set methods
 jest.mock("@vercel/kv", () => ({
-  get: jest.fn(),
-  set: jest.fn(),
+  kv: {
+    get: jest.fn(),
+    set: jest.fn(),
+  },
 }));
 
 // Casting kv.get and kv.set to jest.Mock
