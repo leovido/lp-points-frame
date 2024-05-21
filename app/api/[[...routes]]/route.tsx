@@ -404,7 +404,7 @@ app.frame("/check", async (c) => {
       width: 1080,
       height: 1080,
       headers: {
-        "Content-Type": "image/png",
+        "content-type": "image/png",
       },
     },
     intents: [
