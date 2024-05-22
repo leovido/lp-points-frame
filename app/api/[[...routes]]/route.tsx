@@ -527,9 +527,169 @@ app.frame("/check", async (c) => {
           TN100x LP Points
         </h1>
 
-        {/* {userView(username, fid, totalPoints, todayPoints, rank)}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            width: 857,
+            height: 570,
+            color: "#E0453A",
+            background: "white",
+            borderColor: "#E0453A",
+            borderRadius: 30,
+            borderWidth: 2,
+            boxShadow: "6px 6px #E0453A",
+            marginTop: 40,
+            paddingLeft: 55,
+            paddingRight: 55,
+            paddingTop: 8,
+            paddingBottom: 8,
+          }}
+        >
+          <h1
+            style={{
+              position: "absolute",
+              left: "60%",
+              top: -45,
+              transform: "translateX(-60%)", // Changed to translateX for horizontal centering only
+              color: "white",
+              fontFamily: "Instrument Serif",
+              fontSize: 34,
+              background: mainForegroundColor,
+              paddingTop: 8,
+              paddingBottom: 8,
+              display: "flex", // Added display flex for centering text within the element
+              alignItems: "center",
+              justifyContent: "center",
+              width: 200, // Width as a number, not a string
+              height: 52, // Height as a number, not a string
+              borderRadius: 120,
+            }}
+          >
+            Your stats
+          </h1>
 
-        {footerView(formattedDate)} */}
+          <h1
+            style={{
+              fontSize: 48,
+              fontFamily: "Instrument Serif",
+              marginLeft: "auto",
+              marginTop: 20,
+              marginBottom: -80,
+            }}
+          >
+            Rank
+          </h1>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "100%",
+              alignItems: "center",
+              alignContent: "center",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <h1
+                style={{
+                  fontSize: 80,
+                }}
+              >
+                @{username}
+              </h1>
+              <h1
+                style={{
+                  fontFamily: "Instrument Sans",
+                  marginTop: -24,
+                  fontSize: 32,
+                }}
+              >
+                {fid}
+              </h1>
+            </div>
+            <h1
+              style={{
+                fontSize: 120,
+                color: rankColor,
+                marginLeft: "auto",
+              }}
+            >
+              #{rank}
+            </h1>
+          </div>
+          <p
+            style={{
+              fontFamily: "Instrument Serif",
+              fontSize: 50,
+              color: "#D1BCBB",
+              marginTop: -60,
+              marginBottom: -40,
+              textAlign: "center",
+            }}
+          >
+            ......................................................................
+          </p>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <h1
+              style={{
+                fontFamily: "Instrument Serif",
+                fontSize: 48,
+              }}
+            >
+              Today's points
+            </h1>
+            <h1
+              style={{
+                fontSize: 82,
+                color: pointsColor,
+              }}
+            >
+              {todayPoints}
+            </h1>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginTop: -90,
+              marginBottom: 40,
+            }}
+          >
+            <h1
+              style={{
+                fontFamily: "Instrument Serif",
+                fontSize: 48,
+              }}
+            >
+              Total points
+            </h1>
+            <h1
+              style={{
+                fontSize: 82,
+                color: pointsColor,
+              }}
+            >
+              {totalPoints}
+            </h1>
+          </div>
+        </div>
+
+        {/* {footerView(formattedDate)} */}
       </div>
     ),
     intents: [
