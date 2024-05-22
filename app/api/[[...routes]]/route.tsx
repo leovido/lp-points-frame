@@ -689,7 +689,7 @@ app.frame("/check", async (c) => {
           </div>
         </div>
 
-        {footerView(formattedDate)}
+        {/* {footerView(formattedDate)} */}
       </div>
     ),
     intents: [
