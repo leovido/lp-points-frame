@@ -3,7 +3,7 @@
 import { Button, Frog, TextInput } from "frog";
 import { devtools } from "frog/dev";
 // @ts-ignore
-import { Image } from "./ui.js";
+import { Box, Image } from "./ui.js";
 // @ts-ignore
 import { neynarClient } from "./neynarClient.ts";
 import { handle } from "frog/next";
@@ -64,7 +64,6 @@ const footerView = (formattedDate: string) => (
       bottom: 74,
       position: "absolute",
       alignItems: "center",
-      alignContent: "center",
       justifyContent: "space-around",
       textAlign: "center",
       borderColor: mainForegroundColor,
@@ -376,7 +375,7 @@ app.frame("/", (c) => {
           }}
         >
           <Image
-            src="/vectors.png"
+            src="/vectors2.png"
             width="256"
             height="256"
             objectFit="contain"
@@ -421,7 +420,84 @@ app.frame("/", (c) => {
           </h1>
         </div>
 
-        {footerView(formattedDate)}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "850",
+            height: "58",
+            bottom: 74,
+            position: "absolute",
+            alignItems: "center",
+            justifyContent: "space-around",
+            textAlign: "center",
+            borderColor: mainForegroundColor,
+            background: "white",
+            borderWidth: 2,
+            borderRadius: 50,
+            boxShadow: boxShadow,
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <h6
+              style={{
+                fontFamily: "Instrument Serif",
+                color: mainForegroundColor,
+                fontSize: 25,
+              }}
+            >
+              Design by{"  "}
+            </h6>
+            <h6
+              style={{
+                color: mainForegroundColor,
+                fontSize: 30,
+              }}
+            >
+              @reallyryl
+            </h6>
+          </div>
+          <h6
+            style={{
+              fontFamily: "Instrument Sans",
+              color: mainForegroundColor,
+              fontSize: 20,
+            }}
+          >
+            {formattedDate}
+          </h6>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <h6
+              style={{
+                fontFamily: "Instrument Serif",
+                color: mainForegroundColor,
+                fontSize: 25,
+              }}
+            >
+              Frame by{"  "}
+            </h6>
+            <h6
+              style={{
+                color: mainForegroundColor,
+                fontSize: 30,
+              }}
+            >
+              @leovido
+            </h6>
+          </div>
+        </div>
 
         <div
           style={{
@@ -479,27 +555,22 @@ app.frame("/check", async (c) => {
 
   return c.res({
     image: (
-      <div
-        style={{
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-          flexWrap: "nowrap",
-          textAlign: "center",
-          height: "100%",
-          width: "100%",
-          fontFamily: "Nerko One",
-        }}
+      <Box
+        alignItems="center"
+        display="flex"
+        flexDirection="column"
+        flexWrap="nowrap"
+        textAlign="center"
+        height="100%"
+        width="100%"
+        fontFamily={{ custom: "Nerko One" }}
       >
-        <div
-          style={{
-            display: "flex",
-            position: "absolute",
-            zIndex: "-2",
-            background: "white",
-            borderColor: mainForegroundColor,
-            borderWidth: 20,
-          }}
+        <Box
+          display="flex"
+          position="absolute"
+          background={{ custom: "white" }}
+          borderColor={{ custom: mainForegroundColor }}
+          borderWidth={{ custom: "20" }}
         >
           <Image
             src="/lines.png"
@@ -507,7 +578,7 @@ app.frame("/check", async (c) => {
             height="256"
             objectFit="contain"
           ></Image>
-        </div>
+        </Box>
 
         <h1
           style={{
@@ -525,25 +596,23 @@ app.frame("/check", async (c) => {
           TN100x LP Points
         </h1>
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            width: 857,
-            height: 570,
-            color: "#E0453A",
-            background: "white",
-            borderColor: "#E0453A",
-            borderRadius: 30,
-            borderWidth: 2,
-            boxShadow: "6px 6px #E0453A",
-            marginTop: 40,
-            paddingLeft: 55,
-            paddingRight: 55,
-            paddingTop: 8,
-            paddingBottom: 8,
-          }}
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+          width={{ custom: "857" }}
+          height={{ custom: "570" }}
+          color={{ custom: "#E0453A" }}
+          background={{ custom: "white" }}
+          borderColor={{ custom: "#E0453A" }}
+          borderRadius={{ custom: "30" }}
+          borderWidth={{ custom: "2" }}
+          boxShadow="6px 6px #E0453A"
+          marginTop={{ custom: "40" }}
+          paddingLeft={{ custom: "55" }}
+          paddingRight={{ custom: "55" }}
+          paddingTop={{ custom: "8" }}
+          paddingBottom={{ custom: "8" }}
         >
           <h1
             style={{
@@ -579,21 +648,14 @@ app.frame("/check", async (c) => {
           >
             Rank
           </h1>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              width: "100%",
-              alignItems: "center",
-              alignContent: "center",
-            }}
+          <Box
+            display="flex"
+            flexDirection="row"
+            width={"100%"}
+            alignItems="center"
+            alignContent="center"
           >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
+            <Box display="flex" flexDirection="column">
               <h1
                 style={{
                   fontSize: 80,
@@ -610,7 +672,7 @@ app.frame("/check", async (c) => {
               >
                 {fid}
               </h1>
-            </div>
+            </Box>
             <h1
               style={{
                 fontSize: 120,
@@ -620,7 +682,7 @@ app.frame("/check", async (c) => {
             >
               #{rank}
             </h1>
-          </div>
+          </Box>
           <p
             style={{
               fontFamily: "Instrument Serif",
@@ -633,13 +695,11 @@ app.frame("/check", async (c) => {
           >
             ......................................................................
           </p>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
+          <Box
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            justifyContent="space-between"
           >
             <h1
               style={{
@@ -657,16 +717,14 @@ app.frame("/check", async (c) => {
             >
               {todayPoints}
             </h1>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginTop: -90,
-              marginBottom: 40,
-            }}
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            justifyContent="space-between"
+            marginTop={{ custom: "-90" }}
+            marginBottom={{ custom: "40" }}
           >
             <h1
               style={{
@@ -684,11 +742,74 @@ app.frame("/check", async (c) => {
             >
               {totalPoints}
             </h1>
-          </div>
-        </div>
+          </Box>
+        </Box>
 
-        {/* {footerView(formattedDate)} */}
-      </div>
+        <Box
+          display="flex"
+          flexDirection="row"
+          width={{ custom: "850" }}
+          height={{ custom: "58" }}
+          bottom={{ custom: "74" }}
+          position="absolute"
+          alignItems="center"
+          justifyContent="space-around"
+          textAlign="center"
+          borderColor={{ custom: mainForegroundColor }}
+          background={{ custom: "white" }}
+          borderWidth={{ custom: "2" }}
+          borderRadius={{ custom: "50" }}
+          boxShadow={boxShadow}
+        >
+          <Box display="flex" flexDirection="row" alignItems="center">
+            <h6
+              style={{
+                fontFamily: "Instrument Serif",
+                color: mainForegroundColor,
+                fontSize: 25,
+              }}
+            >
+              Design by{"  "}
+            </h6>
+            <h6
+              style={{
+                color: mainForegroundColor,
+                fontSize: 30,
+              }}
+            >
+              @reallyryl
+            </h6>
+          </Box>
+          <h6
+            style={{
+              fontFamily: "Instrument Sans",
+              color: mainForegroundColor,
+              fontSize: 20,
+            }}
+          >
+            {formattedDate}
+          </h6>
+          <Box display="flex" flexDirection="row" alignItems="center">
+            <h6
+              style={{
+                fontFamily: "Instrument Serif",
+                color: mainForegroundColor,
+                fontSize: 25,
+              }}
+            >
+              Frame by{"  "}
+            </h6>
+            <h6
+              style={{
+                color: mainForegroundColor,
+                fontSize: 30,
+              }}
+            >
+              @leovido
+            </h6>
+          </Box>
+        </Box>
+      </Box>
     ),
     intents: [
       <Button value="Back" action="/">

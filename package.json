@@ -13,6 +13,7 @@
   "dependencies": {
     "@jest/globals": "^29.7.0",
     "@neynar/nodejs-sdk": "^1.23.1",
+    "@resvg/resvg-wasm": "^2.6.2",
     "@types/jest": "^29.5.12",
     "@vercel/kv": "^1.0.1",
     "@vercel/og": "^0.6.2",
@@ -23,6 +24,7 @@
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
+    "satori": "^0.10.13",
     "ts-jest": "^29.1.2"
   },
   "devDependencies": {
