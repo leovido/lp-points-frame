@@ -339,27 +339,22 @@ app.frame("/", (c) => {
   const formattedDate = formatDate(new Date());
   return c.res({
     image: (
-      <div
-        style={{
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-          flexWrap: "nowrap",
-          height: "100%",
-          textAlign: "center",
-          width: "100%",
-          fontFamily: "Nerko One",
-        }}
+      <Box
+        alignItems="center"
+        display="flex"
+        flexDirection="column"
+        flexWrap="nowrap"
+        height="100%"
+        textAlign="center"
+        width="100%"
+        fontFamily={{ custom: "Nerko One" }}
       >
-        <div
-          style={{
-            display: "flex",
-            position: "absolute",
-            zIndex: "-2",
-            background: "white",
-            borderColor: mainForegroundColor,
-            borderWidth: 20,
-          }}
+        <Box
+          display="flex"
+          position="absolute"
+          background={{ custom: "white" }}
+          borderColor={{ custom: mainForegroundColor }}
+          borderWidth={{ custom: "20" }}
         >
           <Image
             src="/lines.png"
@@ -367,20 +362,15 @@ app.frame("/", (c) => {
             height="256"
             objectFit="contain"
           ></Image>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            position: "absolute",
-          }}
-        >
+        </Box>
+        <Box display="flex" position="absolute">
           <Image
             src="/vectors2.png"
             width="256"
             height="256"
             objectFit="contain"
           ></Image>
-        </div>
+        </Box>
 
         <h1
           style={{
@@ -398,53 +388,43 @@ app.frame("/", (c) => {
           TN100x LP Points
         </h1>
 
-        <div style={{ display: "flex" }}>
-          <h1
-            style={{
-              fontSize: 82,
-              color: mainForegroundColor,
-              width: "856",
-              height: "319",
-              background: "white",
-              borderColor: mainForegroundColor,
-              borderRadius: 30,
-              borderWidth: 2,
-              paddingLeft: 80,
-              paddingRight: 80,
-              paddingTop: 8,
-              paddingBottom: 8,
-              boxShadow: boxShadow,
-            }}
-          >
-            Check your TN100x LP points from this frame
-          </h1>
-        </div>
-
-        <div
+        <h1
           style={{
-            display: "flex",
-            flexDirection: "row",
-            width: "850",
-            height: "58",
-            bottom: 74,
-            position: "absolute",
-            alignItems: "center",
-            justifyContent: "space-around",
-            textAlign: "center",
-            borderColor: mainForegroundColor,
+            fontSize: 82,
+            color: mainForegroundColor,
+            width: "856",
+            height: "319",
             background: "white",
+            borderColor: mainForegroundColor,
+            borderRadius: 30,
             borderWidth: 2,
-            borderRadius: 50,
+            paddingLeft: 80,
+            paddingRight: 80,
+            paddingTop: 8,
+            paddingBottom: 8,
             boxShadow: boxShadow,
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
+          Check your TN100x LP points from this frame
+        </h1>
+
+        <Box
+          display="flex"
+          flexDirection="row"
+          width={{ custom: "850" }}
+          height={{ custom: "58" }}
+          bottom={{ custom: "74" }}
+          position="absolute"
+          alignItems="center"
+          justifyContent="space-around"
+          textAlign="center"
+          borderColor={{ custom: mainForegroundColor }}
+          background={{ custom: "white" }}
+          borderWidth={{ custom: "2" }}
+          borderRadius={{ custom: "50" }}
+          boxShadow={boxShadow}
+        >
+          <Box flexDirection="row" alignItems="center">
             <h6
               style={{
                 fontFamily: "Instrument Serif",
@@ -462,7 +442,7 @@ app.frame("/", (c) => {
             >
               @reallyryl
             </h6>
-          </div>
+          </Box>
           <h6
             style={{
               fontFamily: "Instrument Sans",
@@ -472,13 +452,7 @@ app.frame("/", (c) => {
           >
             {formattedDate}
           </h6>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
+          <Box flexDirection="row" alignItems="center">
             <h6
               style={{
                 fontFamily: "Instrument Serif",
@@ -496,23 +470,18 @@ app.frame("/", (c) => {
             >
               @leovido
             </h6>
-          </div>
-        </div>
+          </Box>
+        </Box>
 
-        <div
-          style={{
-            display: "flex",
-            position: "absolute",
-          }}
-        >
+        <Box display="flex" position="absolute">
           <Image
             src="/floaties.png"
             width="256"
             height="256"
             objectFit="contain"
           ></Image>
-        </div>
-      </div>
+        </Box>
+      </Box>
     ),
     intents: [
       false && <TextInput placeholder="Search by FID" />,
