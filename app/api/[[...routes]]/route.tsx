@@ -491,7 +491,7 @@ app.frame("/check", async (c) => {
           fontFamily: "Nerko One",
         }}
       >
-        <div
+        {/* <div
           style={{
             display: "flex",
             position: "absolute",
@@ -509,7 +509,7 @@ app.frame("/check", async (c) => {
             borderTopLeftRadius={"10"}
             borderTopRightRadius={"10"}
           ></Image>
-        </div>
+        </div> */}
 
         <h1
           style={{
