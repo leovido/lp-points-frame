@@ -552,18 +552,18 @@ app.frame("/check", async (c) => {
               position: "absolute",
               left: "60%",
               top: -45,
-              transform: "translateX(-60%)", // Changed to translateX for horizontal centering only
+              transform: "translateX(-60%)",
               color: "white",
               fontFamily: "Instrument Serif",
               fontSize: 34,
               background: mainForegroundColor,
               paddingTop: 8,
               paddingBottom: 8,
-              display: "flex", // Added display flex for centering text within the element
+              display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: 200, // Width as a number, not a string
-              height: 52, // Height as a number, not a string
+              width: 200,
+              height: 52,
               borderRadius: 120,
             }}
           >
@@ -689,7 +689,7 @@ app.frame("/check", async (c) => {
           </div>
         </div>
 
-        {/* {footerView(formattedDate)} */}
+        {footerView(formattedDate)}
       </div>
     ),
     intents: [
