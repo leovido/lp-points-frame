@@ -527,9 +527,9 @@ app.frame("/check", async (c) => {
           TN100x LP Points
         </h1>
 
-        {userView(username, fid, totalPoints, todayPoints, rank)}
+        {/* {userView(username, fid, totalPoints, todayPoints, rank)}
 
-        {footerView(formattedDate)}
+        {footerView(formattedDate)} */}
       </div>
     ),
     intents: [
