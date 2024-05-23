@@ -25,25 +25,32 @@ export async function convertSvgToPngByResvg(targetSvg: Buffer | string) {
   }
 }
 
-export async function tsxToPNGBuffer(
-  jsx: JSX.Element,
-  fontName: string = "Outfit-Regular",
-  fontPath: string = "./public/Outfit-Regular.ttf"
-) {
+export async function tsxToPNGBuffer(jsx: JSX.Element) {
   const svg = await satori(jsx, {
     width: 1080,
     height: 1080,
     fonts: [
       {
-        name: fontName,
-        data: await promises.readFile(fontPath),
+        name: "Instrument Sans",
+        data: await promises.readFile("./public/InstrumentSans-Regular.otf"),
+        weight: 400,
+        style: "normal",
+      },
+      {
+        name: "Instrument Serif",
+        data: await promises.readFile("./public/InstrumentSerif-Regular.ttf"),
+        weight: 400,
+        style: "normal",
+      },
+      {
+        name: "Nerko One",
+        data: await promises.readFile("./public/NerkoOne-Regular.ttf"),
         weight: 400,
         style: "normal",
       },
     ],
     loadAdditionalAsset: async (code: string, segment: string) => {
       if (code === "emoji") {
-        console.log(segment);
         return (
           `data:image/svg+xml;base64,` +
           btoa(await loadEmoji("twemoji", getIconCode(segment)))
@@ -65,6 +72,7 @@ export function saveAsPNG(buffer: Buffer, filePath: string) {
     fs.writeFileSync(filePath, buffer);
     return true;
   } catch (error) {
+    console.warn(error, "le error");
     console.log("Error happened while CREATING the file!");
     return false;
   }
