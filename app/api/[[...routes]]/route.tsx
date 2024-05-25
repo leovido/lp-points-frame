@@ -17,7 +17,7 @@ export const pointsColor = "#4387D7";
 export const boxShadow = "6px 6px #E0453A";
 
 const app = new Frog({
-  verify: process.env.CONFIG === "PROD",
+  verify: false,
   assetsPath: "/",
   basePath: "/api",
   imageAspectRatio: "1:1",
@@ -517,24 +517,21 @@ app.frame("/check", async (c) => {
     }) ?? "N/A";
   const rank = liqResponse?.rank.toString() ?? "N/A";
 
-  const leImage = await fetch(`${process.env.NEXT_PUBLIC_HOST}/generate`, {
-    method: "POST",
-    body: JSON.stringify({
-      totalPoints,
-      todayPoints,
-      username,
-      formattedDate,
-      fid,
-      rank,
-    }),
-  });
-  const image = await leImage.json();
-
-  // const pfpURL =
-  //   (await neynarClient.fetchBulkUsers([fid])).users[0].pfp_url ?? "";
+  const pfpURL =
+    (await neynarClient.fetchBulkUsers([fid])).users[0].pfp_url ?? "";
 
   return c.res({
-    image: image.filePath,
+    image: (
+      <div style={{ display: "flex", width: "100%", height: "100%" }}>
+        <Image
+          src={`${process.env.BE_HOST}/api/hello?totalPoints=${totalPoints}&todayPoints=${todayPoints}&fid=${fid}&username=${username}&formattedDate=${formattedDate}&rank=${rank}`}
+        ></Image>
+      </div>
+    ),
+    imageOptions: {
+      width: 1080,
+      height: 1080,
+    },
     intents: [
       <Button value="Back" action="/">
         Back
