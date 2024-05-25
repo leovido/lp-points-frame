@@ -14,7 +14,6 @@ import { fetchAllPoints, fetchLiquidityMiningScore } from "./client.ts";
 export const mainForegroundColor = "#E0453A";
 export const rankColor = "#F08303";
 export const pointsColor = "#4387D7";
-export const boxShadow = "6px 6px #E0453A";
 
 const app = new Frog({
   verify: false,
@@ -70,7 +69,7 @@ export const footerView = (formattedDate: string) => (
       background: "white",
       borderWidth: 2,
       borderRadius: 50,
-      boxShadow: boxShadow,
+      boxShadow: "6px 6px #E0453A",
     }}
   >
     <div
@@ -401,7 +400,7 @@ app.frame("/", (c) => {
             paddingRight: 80,
             paddingTop: 8,
             paddingBottom: 8,
-            boxShadow: boxShadow,
+            boxShadow: "6px 6px #E0453A",
           }}
         >
           Check your TN100x LP points from this frame
