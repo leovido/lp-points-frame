@@ -421,7 +421,7 @@ app.frame("/", (c) => {
           background={{ custom: "white" }}
           borderWidth={{ custom: "2" }}
           borderRadius={{ custom: "50" }}
-          boxShadow={boxShadow}
+          boxShadow={"6px 6px #E0453A"}
         >
           <Box flexDirection="row" alignItems="center">
             <h6
