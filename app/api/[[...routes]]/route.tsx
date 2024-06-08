@@ -3,7 +3,7 @@
 import { Button, Frog, TextInput } from "frog";
 import { devtools } from "frog/dev";
 // @ts-ignore
-import { Box, Image } from "./ui.js";
+import { Box, HStack, Image, Text } from "./ui.js";
 // @ts-ignore
 import { neynarClient } from "./neynarClient.ts";
 import { handle } from "frog/next";
@@ -53,32 +53,24 @@ const app = new Frog({
   },
 });
 
-export const footerView = (formattedDate: string) => (
-  <div
-    style={{
-      display: "flex",
-      flexDirection: "row",
-      width: "850",
-      height: "58",
-      bottom: 74,
-      position: "absolute",
-      alignItems: "center",
-      justifyContent: "space-around",
-      textAlign: "center",
-      borderColor: mainForegroundColor,
-      background: "white",
-      borderWidth: 2,
-      borderRadius: 50,
-      boxShadow: "6px 6px #E0453A",
-    }}
+const footerView = (formattedDate: string) => (
+  <Box
+    display="flex"
+    flexDirection="row"
+    width={{ custom: "850" }}
+    height={{ custom: "58" }}
+    bottom={{ custom: "74" }}
+    position="absolute"
+    alignItems="center"
+    justifyContent="space-around"
+    textAlign="center"
+    borderColor={{ custom: mainForegroundColor }}
+    background={{ custom: "white" }}
+    borderWidth={{ custom: "2" }}
+    borderRadius={{ custom: "50" }}
+    boxShadow={"6px 6px #E0453A"}
   >
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-      }}
-    >
+    <Box flexDirection="row" alignItems="center">
       <h6
         style={{
           fontFamily: "Instrument Serif",
@@ -96,7 +88,7 @@ export const footerView = (formattedDate: string) => (
       >
         @reallyryl
       </h6>
-    </div>
+    </Box>
     <h6
       style={{
         fontFamily: "Instrument Sans",
@@ -106,13 +98,7 @@ export const footerView = (formattedDate: string) => (
     >
       {formattedDate}
     </h6>
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-      }}
-    >
+    <Box flexDirection="row" alignItems="center">
       <h6
         style={{
           fontFamily: "Instrument Serif",
@@ -130,8 +116,8 @@ export const footerView = (formattedDate: string) => (
       >
         @leovido
       </h6>
-    </div>
-  </div>
+    </Box>
+  </Box>
 );
 
 export const userView = (
@@ -143,68 +129,46 @@ export const userView = (
   rank: string
 ) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        width: 857,
-        height: 570,
-        color: "#E0453A",
-        background: "white",
-        borderColor: "#E0453A",
-        borderRadius: 30,
-        borderWidth: 2,
-        boxShadow: "6px 6px #E0453A",
-        marginTop: 40,
-        paddingLeft: 55,
-        paddingRight: 55,
-        paddingTop: 8,
-        paddingBottom: 8,
-      }}
-    >
-      <h1
-        style={{
-          position: "absolute",
-          left: "60%",
-          top: -45,
-          transform: "translateX(-60%)",
-          color: "white",
-          fontFamily: "Instrument Serif",
-          fontSize: 34,
-          background: mainForegroundColor,
-          paddingTop: 8,
-          paddingBottom: 8,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: 200,
-          height: 52,
-          borderRadius: 120,
-        }}
+    <Box display="flex">
+      <Box
+        position="absolute"
+        left={{ custom: "60%" }}
+        top={{ custom: "-45" }}
+        transform="translateX(-60%)"
+        color={{ custom: "white" }}
+        background={{ custom: mainForegroundColor }}
+        paddingTop={"8"}
+        paddingBottom={"8"}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        width={{ custom: "200" }}
+        height={"52"}
+        borderRadius={{ custom: "152" }}
       >
-        Your stats
-      </h1>
-
-      <h1
-        style={{
-          fontSize: 48,
-          fontFamily: "Instrument Serif",
-          marginLeft: "auto",
-          marginTop: 20,
-          marginBottom: -80,
-        }}
+        <Text
+          color={{ custom: "white" }}
+          size={{ custom: "34" }}
+          font={{ custom: "Instrument Serif" }}
+          align="center"
+        >
+          Your stats
+        </Text>
+      </Box>
+      <Text
+        color={{ custom: "#D1BCBB" }}
+        size={{ custom: "48" }}
+        font={{ custom: "Instrument Serif" }}
+        align="center"
       >
         Rank
-      </h1>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          width: "100%",
-          alignItems: "center",
-          alignContent: "center",
-        }}
+      </Text>
+      <Box
+        display="flex"
+        flexDirection="row"
+        width="100%"
+        alignItems="center"
+        alignContent="center"
       >
         <div
           style={{
@@ -238,72 +202,49 @@ export const userView = (
         >
           #{rank}
         </h1>
-      </div>
-      <p
-        style={{
-          fontFamily: "Instrument Serif",
-          fontSize: 50,
-          color: "#D1BCBB",
-          marginTop: -60,
-          marginBottom: -40,
-          textAlign: "center",
-        }}
+      </Box>
+
+      <Text
+        color={{ custom: "#D1BCBB" }}
+        size={{ custom: "50" }}
+        font={{ custom: "Instrument Serif" }}
+      >
+        {todayPoints}
+      </Text>
+
+      <Text
+        color={{ custom: "#D1BCBB" }}
+        size={{ custom: "50" }}
+        font={{ custom: "Instrument Serif" }}
+        align="center"
       >
         ......................................................................
-      </p>
-      <div
+      </Text>
+
+      {/* <p
         style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
+          fontFamily: "Instrument Serif",
+          marginTop: -60,
+          marginBottom: -40,
         }}
-      >
-        <h1
-          style={{
-            fontFamily: "Instrument Serif",
-            fontSize: 48,
-          }}
-        >
-          Today's points
-        </h1>
-        <h1
-          style={{
-            fontSize: 82,
-            color: pointsColor,
-          }}
-        >
+      ></p> */}
+      <HStack alignHorizontal="space-between" alignVertical="center">
+        <Text font={{ custom: "Instrument Serif" }} size={"48"}>
+          Todays points
+        </Text>
+        <Text color={{ custom: pointsColor }} size={{ custom: "82" }}>
           {todayPoints}
-        </h1>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginTop: -90,
-          marginBottom: 40,
-        }}
-      >
-        <h1
-          style={{
-            fontFamily: "Instrument Serif",
-            fontSize: 48,
-          }}
-        >
+        </Text>
+      </HStack>
+      <HStack alignHorizontal="space-between" alignVertical="center">
+        <Text font={{ custom: "Instrument Serif" }} size={"48"}>
           Total points
-        </h1>
-        <h1
-          style={{
-            fontSize: 82,
-            color: pointsColor,
-          }}
-        >
+        </Text>
+        <Text color={{ custom: pointsColor }} size={{ custom: "82" }}>
           {totalPoints}
-        </h1>
-      </div>
-    </div>
+        </Text>
+      </HStack>
+    </Box>
   );
 };
 
@@ -333,8 +274,8 @@ export const formatDate = (date: Date) => {
 // export const runtime = "edge";
 
 app.frame("/", (c) => {
-  const { verified } = c;
   const formattedDate = formatDate(new Date());
+
   return c.res({
     image: (
       <Box
@@ -385,7 +326,6 @@ app.frame("/", (c) => {
         >
           TN100x LP Points
         </h1>
-
         <h1
           style={{
             fontSize: 82,
@@ -406,71 +346,7 @@ app.frame("/", (c) => {
           Check your TN100x LP points from this frame
         </h1>
 
-        <Box
-          display="flex"
-          flexDirection="row"
-          width={{ custom: "850" }}
-          height={{ custom: "58" }}
-          bottom={{ custom: "74" }}
-          position="absolute"
-          alignItems="center"
-          justifyContent="space-around"
-          textAlign="center"
-          borderColor={{ custom: mainForegroundColor }}
-          background={{ custom: "white" }}
-          borderWidth={{ custom: "2" }}
-          borderRadius={{ custom: "50" }}
-          boxShadow={"6px 6px #E0453A"}
-        >
-          <Box flexDirection="row" alignItems="center">
-            <h6
-              style={{
-                fontFamily: "Instrument Serif",
-                color: mainForegroundColor,
-                fontSize: 25,
-              }}
-            >
-              Design by{"  "}
-            </h6>
-            <h6
-              style={{
-                color: mainForegroundColor,
-                fontSize: 30,
-              }}
-            >
-              @reallyryl
-            </h6>
-          </Box>
-          <h6
-            style={{
-              fontFamily: "Instrument Sans",
-              color: mainForegroundColor,
-              fontSize: 20,
-            }}
-          >
-            {formattedDate}
-          </h6>
-          <Box flexDirection="row" alignItems="center">
-            <h6
-              style={{
-                fontFamily: "Instrument Serif",
-                color: mainForegroundColor,
-                fontSize: 25,
-              }}
-            >
-              Frame by{"  "}
-            </h6>
-            <h6
-              style={{
-                color: mainForegroundColor,
-                fontSize: 30,
-              }}
-            >
-              @leovido
-            </h6>
-          </Box>
-        </Box>
-
+        {footerView(formattedDate)}
         <Box display="flex" position="absolute">
           <Image
             src="/floaties.png"
@@ -482,7 +358,7 @@ app.frame("/", (c) => {
       </Box>
     ),
     intents: [
-      false && <TextInput placeholder="Search by FID" />,
+      <TextInput placeholder="Search by FID" />,
       <Button value="Check" action="/check">
         Check
       </Button>,
@@ -491,10 +367,11 @@ app.frame("/", (c) => {
 });
 
 app.frame("/check", async (c) => {
-  const { frameData } = c;
+  const { frameData, inputText } = c;
 
   const formattedDate = formatDate(new Date());
-  const fid = frameData?.fid ?? 0;
+  const unwrappedText = inputText !== undefined ? inputText : "";
+  const fid = unwrappedText.length > 0 ? Number(unwrappedText) : frameData!.fid;
 
   const user = (await neynarClient.fetchBulkUsers([fid])).users[0];
   const username = user.username;
@@ -516,21 +393,23 @@ app.frame("/check", async (c) => {
     }) ?? "N/A";
   const rank = liqResponse?.rank.toString() ?? "N/A";
 
-  const pfpURL =
-    (await neynarClient.fetchBulkUsers([fid])).users[0].pfp_url ?? "";
+  // const pfpURL =
+  //   (await neynarClient.fetchBulkUsers([fid])).users[0].pfp_url ?? "";
+
+  const params = new URLSearchParams({
+    totalPoints: totalPoints,
+    todayPoints: todayPoints,
+    rank: rank,
+    fid: fid.toString(),
+    username: username,
+  });
+
+  const imageURL = `http://localhost:3000/api/imageLP?${params.toString()}`;
+
+  const jsx = <Image src={imageURL} width={"100%"} objectFit="cover" />;
 
   return c.res({
-    image: (
-      <div style={{ display: "flex", width: "100%", height: "100%" }}>
-        <Image
-          src={`${process.env.BE_HOST}/api/hello?totalPoints=${totalPoints}&todayPoints=${todayPoints}&fid=${fid}&username=${username}&formattedDate=${formattedDate}&rank=${rank}`}
-        ></Image>
-      </div>
-    ),
-    imageOptions: {
-      width: 1080,
-      height: 1080,
-    },
+    image: imageURL,
     intents: [
       <Button value="Back" action="/">
         Back
@@ -539,7 +418,132 @@ app.frame("/check", async (c) => {
   });
 });
 
+app.image("/imageLP", async (c) => {
+  const reqJSON = c.req.query();
+  const json = removeAmpFromKeys(reqJSON);
+  const { todayPoints, totalPoints, fid, username, rank } = json;
+
+  const formattedDate = formatDate(new Date());
+
+  return c.res({
+    image: (
+      <Box
+        alignItems="center"
+        display="flex"
+        flexDirection="column"
+        flexWrap="nowrap"
+        height="100%"
+        textAlign="center"
+        width="100%"
+        fontFamily={{ custom: "Nerko One" }}
+      >
+        {/* <Box
+          display="flex"
+          position="absolute"
+          background={{ custom: "white" }}
+          borderColor={{ custom: mainForegroundColor }}
+          borderWidth={{ custom: "20" }}
+        >
+          <Image
+            src="/lines.png"
+            width="256"
+            height="256"
+            objectFit="contain"
+          ></Image>
+        </Box> */}
+
+        <h1
+          style={{
+            color: "white",
+            fontSize: 100,
+            background: mainForegroundColor,
+            marginTop: 246,
+            paddingTop: 8,
+            paddingBottom: 8,
+            paddingLeft: 32,
+            paddingRight: 32,
+            borderRadius: 120,
+          }}
+        >
+          TN100x LP Points
+        </h1>
+        {userView(username, Number(fid), totalPoints, todayPoints, rank)}
+        {footerView(formattedDate)}
+      </Box>
+    ),
+    headers: {
+      "Cache-Control": "max-age=0",
+    },
+  });
+});
+
 devtools(app, { serveStatic });
 
 export const GET = handle(app);
 export const POST = handle(app);
+
+function removeAmpFromKeys(obj: Record<string, string>) {
+  const newObj: Record<string, string> = {};
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const newKey = key.replace(/^amp;/, "");
+      newObj[newKey] = obj[key];
+    }
+  }
+  return newObj;
+}
+
+const mainView = (children: JSX.Element): JSX.Element => {
+  return (
+    <Box
+      alignItems="center"
+      display="flex"
+      flexDirection="column"
+      flexWrap="nowrap"
+      height="100%"
+      textAlign="center"
+      width="100%"
+      fontFamily={{ custom: "Nerko One" }}
+    >
+      <Box
+        display="flex"
+        position="absolute"
+        background={{ custom: "white" }}
+        borderColor={{ custom: mainForegroundColor }}
+        borderWidth={{ custom: "20" }}
+      >
+        <Image
+          src="/lines.png"
+          width="256"
+          height="256"
+          objectFit="contain"
+        ></Image>
+      </Box>
+      <Box display="flex" position="absolute">
+        <Image
+          src="/vectors2.png"
+          width="256"
+          height="256"
+          objectFit="contain"
+        ></Image>
+      </Box>
+
+      <h1
+        style={{
+          color: "white",
+          fontSize: 100,
+          background: mainForegroundColor,
+          marginTop: 246,
+          paddingTop: 8,
+          paddingBottom: 8,
+          paddingLeft: 32,
+          paddingRight: 32,
+          borderRadius: 120,
+        }}
+      >
+        TN100x LP Points
+      </h1>
+      {children}
+    </Box>
+  );
+};
