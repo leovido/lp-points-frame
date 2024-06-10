@@ -424,8 +424,6 @@ app.image("/imageLP", async (c) => {
   const json = removeAmpFromKeys(reqJSON);
   const { todayPoints, totalPoints, fid, username, rank } = json;
 
-  // const formattedDate = formatDate(new Date());
-
   const imageUrl = `http://localhost:3000/og?totalPoints=${totalPoints}&todayPoints=${todayPoints}&rank=${rank}&fid=${fid}&username=${username}`;
 
   return c.res({

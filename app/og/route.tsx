@@ -54,9 +54,7 @@ export async function GET(req: NextRequest) {
         >
           <Image src={`${baseUrl}/lines.png`} objectFit="contain"></Image>
         </Box>
-        <Box display="flex" position="absolute" paddingTop={"44"}>
-          <Image src={`${baseUrl}/ham.png`} objectFit="cover"></Image>
-        </Box>
+
         <Box display="flex" position="absolute">
           <Image src={`${baseUrl}/vectors2.png`} objectFit="contain"></Image>
         </Box>
@@ -163,14 +161,16 @@ export async function GET(req: NextRequest) {
             </h1>
           </Box>
 
-          <Text
-            color={{ custom: "#D1BCBB" }}
-            size={{ custom: "50" }}
-            font={{ custom: "Instrument Serif" }}
-            align="center"
-          >
-            ......................................................................
-          </Text>
+          <Box marginTop={{ custom: "-50" }} paddingBottom="18">
+            <Text
+              color={{ custom: "#D1BCBB" }}
+              size={{ custom: "50" }}
+              font={{ custom: "Instrument Serif" }}
+              align="center"
+            >
+              ......................................................................
+            </Text>
+          </Box>
 
           <HStack alignHorizontal="space-between" alignVertical="center">
             <Text
@@ -197,7 +197,13 @@ export async function GET(req: NextRequest) {
             </Text>
           </HStack>
         </Box>
-
+        <Box display="flex" position="absolute" paddingTop={{ custom: "254" }}>
+          <Image
+            src={`${baseUrl}/ham.png`}
+            height={{ custom: "700" }}
+            objectFit="contain"
+          ></Image>
+        </Box>
         <Box
           display="flex"
           flexDirection="row"
