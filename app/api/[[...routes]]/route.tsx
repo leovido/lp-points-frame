@@ -11,7 +11,6 @@ import { serveStatic } from "frog/serve-static";
 // @ts-ignore
 import { fetchAllPoints, fetchLiquidityMiningScore } from "./client.ts";
 // @ts-ignore
-import { mainView } from "../../og/route.jsx";
 
 export const mainForegroundColor = "#E0453A";
 export const rankColor = "#F08303";
@@ -421,13 +420,13 @@ app.frame("/check", async (c) => {
 });
 
 app.image("/imageLP", async (c) => {
-  // const reqJSON = c.req.query();
-  // const json = removeAmpFromKeys(reqJSON);
-  // const { todayPoints, totalPoints, fid, username, rank } = json;
+  const reqJSON = c.req.query();
+  const json = removeAmpFromKeys(reqJSON);
+  const { todayPoints, totalPoints, fid, username, rank } = json;
 
   // const formattedDate = formatDate(new Date());
 
-  const imageUrl = `http://localhost:3000/og?totalPoints=2312&todayPoints=4235&rank=4&fid=20432&username=username`;
+  const imageUrl = `http://localhost:3000/og?totalPoints=${totalPoints}&todayPoints=${todayPoints}&rank=${rank}&fid=${fid}&username=${username}`;
 
   return c.res({
     image: <Image src={imageUrl} objectFit="contain" />,
