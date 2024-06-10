@@ -410,7 +410,7 @@ app.frame("/check", async (c) => {
   const jsx = <Image src={imageURL} objectFit="contain" />;
 
   return c.res({
-    image: jsx,
+    image: `http://localhost:3000/api/imageLP?totalPoints=${totalPoints}&username=${username}&todayPoints=${todayPoints}&rank=${rank}&fid=${fid}`,
     intents: [
       <Button value="Back" action="/">
         Back
