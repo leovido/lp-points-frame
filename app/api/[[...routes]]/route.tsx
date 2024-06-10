@@ -10,6 +10,8 @@ import { handle } from "frog/next";
 import { serveStatic } from "frog/serve-static";
 // @ts-ignore
 import { fetchAllPoints, fetchLiquidityMiningScore } from "./client.ts";
+// @ts-ignore
+import { mainView } from "../../og/route.jsx";
 
 export const mainForegroundColor = "#E0453A";
 export const rankColor = "#F08303";
@@ -406,10 +408,10 @@ app.frame("/check", async (c) => {
 
   const imageURL = `http://localhost:3000/api/imageLP?${params.toString()}`;
 
-  const jsx = <Image src={imageURL} width={"100%"} objectFit="cover" />;
+  const jsx = <Image src={imageURL} objectFit="contain" />;
 
   return c.res({
-    image: imageURL,
+    image: jsx,
     intents: [
       <Button value="Back" action="/">
         Back
@@ -419,58 +421,16 @@ app.frame("/check", async (c) => {
 });
 
 app.image("/imageLP", async (c) => {
-  const reqJSON = c.req.query();
-  const json = removeAmpFromKeys(reqJSON);
-  const { todayPoints, totalPoints, fid, username, rank } = json;
+  // const reqJSON = c.req.query();
+  // const json = removeAmpFromKeys(reqJSON);
+  // const { todayPoints, totalPoints, fid, username, rank } = json;
 
-  const formattedDate = formatDate(new Date());
+  // const formattedDate = formatDate(new Date());
+
+  const imageUrl = `http://localhost:3000/og?totalPoints=2312&todayPoints=4235&rank=4&fid=20432&username=username`;
 
   return c.res({
-    image: (
-      <Box
-        alignItems="center"
-        display="flex"
-        flexDirection="column"
-        flexWrap="nowrap"
-        height="100%"
-        textAlign="center"
-        width="100%"
-        fontFamily={{ custom: "Nerko One" }}
-      >
-        {/* <Box
-          display="flex"
-          position="absolute"
-          background={{ custom: "white" }}
-          borderColor={{ custom: mainForegroundColor }}
-          borderWidth={{ custom: "20" }}
-        >
-          <Image
-            src="/lines.png"
-            width="256"
-            height="256"
-            objectFit="contain"
-          ></Image>
-        </Box> */}
-
-        <h1
-          style={{
-            color: "white",
-            fontSize: 100,
-            background: mainForegroundColor,
-            marginTop: 246,
-            paddingTop: 8,
-            paddingBottom: 8,
-            paddingLeft: 32,
-            paddingRight: 32,
-            borderRadius: 120,
-          }}
-        >
-          TN100x LP Points
-        </h1>
-        {userView(username, Number(fid), totalPoints, todayPoints, rank)}
-        {footerView(formattedDate)}
-      </Box>
-    ),
+    image: <Image src={imageUrl} objectFit="contain" />,
     headers: {
       "Cache-Control": "max-age=0",
     },
@@ -493,57 +453,57 @@ function removeAmpFromKeys(obj: Record<string, string>) {
   return newObj;
 }
 
-const mainView = (children: JSX.Element): JSX.Element => {
-  return (
-    <Box
-      alignItems="center"
-      display="flex"
-      flexDirection="column"
-      flexWrap="nowrap"
-      height="100%"
-      textAlign="center"
-      width="100%"
-      fontFamily={{ custom: "Nerko One" }}
-    >
-      <Box
-        display="flex"
-        position="absolute"
-        background={{ custom: "white" }}
-        borderColor={{ custom: mainForegroundColor }}
-        borderWidth={{ custom: "20" }}
-      >
-        <Image
-          src="/lines.png"
-          width="256"
-          height="256"
-          objectFit="contain"
-        ></Image>
-      </Box>
-      <Box display="flex" position="absolute">
-        <Image
-          src="/vectors2.png"
-          width="256"
-          height="256"
-          objectFit="contain"
-        ></Image>
-      </Box>
+// const mainView = (children: JSX.Element): JSX.Element => {
+//   return (
+//     <Box
+//       alignItems="center"
+//       display="flex"
+//       flexDirection="column"
+//       flexWrap="nowrap"
+//       height="100%"
+//       textAlign="center"
+//       width="100%"
+//       fontFamily={{ custom: "Nerko One" }}
+//     >
+//       <Box
+//         display="flex"
+//         position="absolute"
+//         background={{ custom: "white" }}
+//         borderColor={{ custom: mainForegroundColor }}
+//         borderWidth={{ custom: "20" }}
+//       >
+//         <Image
+//           src="/lines.png"
+//           width="256"
+//           height="256"
+//           objectFit="contain"
+//         ></Image>
+//       </Box>
+//       <Box display="flex" position="absolute">
+//         <Image
+//           src="/vectors2.png"
+//           width="256"
+//           height="256"
+//           objectFit="contain"
+//         ></Image>
+//       </Box>
 
-      <h1
-        style={{
-          color: "white",
-          fontSize: 100,
-          background: mainForegroundColor,
-          marginTop: 246,
-          paddingTop: 8,
-          paddingBottom: 8,
-          paddingLeft: 32,
-          paddingRight: 32,
-          borderRadius: 120,
-        }}
-      >
-        TN100x LP Points
-      </h1>
-      {children}
-    </Box>
-  );
-};
+//       <h1
+//         style={{
+//           color: "white",
+//           fontSize: 100,
+//           background: mainForegroundColor,
+//           marginTop: 246,
+//           paddingTop: 8,
+//           paddingBottom: 8,
+//           paddingLeft: 32,
+//           paddingRight: 32,
+//           borderRadius: 120,
+//         }}
+//       >
+//         TN100x LP Points
+//       </h1>
+//       {children}
+//     </Box>
+//   );
+// };
