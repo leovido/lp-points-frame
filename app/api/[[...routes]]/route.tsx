@@ -405,10 +405,6 @@ app.frame("/check", async (c) => {
     username: username,
   });
 
-  const imageURL = `http://localhost:3000/api/imageLP?${params.toString()}`;
-
-  const jsx = <Image src={imageURL} objectFit="contain" />;
-
   return c.res({
     image: `http://localhost:3000/api/imageLP?totalPoints=${totalPoints}&username=${username}&todayPoints=${todayPoints}&rank=${rank}&fid=${fid}`,
     intents: [
