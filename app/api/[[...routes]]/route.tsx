@@ -284,7 +284,229 @@ app.frame("/check", async (c) => {
   //   (await neynarClient.fetchBulkUsers([fid])).users[0].pfp_url ?? "";
 
   return c.res({
-    image: `${process.env.NEXT_PUBLIC_URL}/api/imageLP?totalPoints=${totalPoints}&username=${username}&todayPoints=${todayPoints}&rank=${rank}&fid=${fid}`,
+    image: (
+      <Box
+        alignItems="center"
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+        flexWrap="nowrap"
+        height="100%"
+        textAlign="center"
+        width="100%"
+      >
+        {/* <Box height="100%" width="100%" position="absolute">
+          <Image src={`${baseUrl}/user-bg.jpg`} objectFit="contain"></Image>
+        </Box> */}
+
+        <Box
+          display="flex"
+          flexDirection="column"
+          width={{ custom: "857" }}
+          height={{ custom: "570" }}
+          borderColor={{ custom: mainForegroundColor }}
+          background={{ custom: "white" }}
+          borderWidth={{ custom: "2" }}
+          borderRadius={{ custom: "50" }}
+          boxShadow={"6px 6px #E0453A"}
+          paddingLeft={"32"}
+          paddingRight={"32"}
+          marginTop={{ custom: "300" }}
+        >
+          <Box
+            position="absolute"
+            left={{ custom: "60%" }}
+            top={{ custom: "-30" }}
+            transform="translateX(-60%)"
+            color={{ custom: "white" }}
+            background={{ custom: mainForegroundColor }}
+            justifyContent="center"
+            paddingTop={"8"}
+            paddingBottom={"8"}
+            width={{ custom: "200" }}
+            height={{ custom: "52" }}
+            borderRadius={{ custom: "152" }}
+          >
+            <Box marginTop={{ custom: "-2" }}>
+              <Text
+                color={{ custom: "white" }}
+                size={{ custom: "34" }}
+                font={{ custom: "Instrument Serif" }}
+                align="center"
+              >
+                Your stats
+              </Text>
+            </Box>
+          </Box>
+
+          <Box marginTop={{ custom: "20" }} marginBottom={{ custom: "-15" }}>
+            <Text
+              color={{ custom: mainForegroundColor }}
+              size={{ custom: "48" }}
+              font={{ custom: "Instrument Serif" }}
+              align="right"
+            >
+              Rank
+            </Text>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="row"
+            width="100%"
+            alignItems="center"
+            alignContent="center"
+            marginTop={"-20"}
+          >
+            <VStack>
+              <Text
+                size={{ custom: "80" }}
+                color={{ custom: mainForegroundColor }}
+              >
+                @{username}
+              </Text>
+              <Text
+                font={{ custom: "Instrument Sans" }}
+                size={{ custom: "32" }}
+                color={{ custom: mainForegroundColor }}
+              >
+                {fid}
+              </Text>
+            </VStack>
+            <h1
+              style={{
+                fontSize: 120,
+                color: rankColor,
+                marginLeft: "auto",
+              }}
+            >
+              #{rank}
+            </h1>
+          </Box>
+
+          {/* <Box marginTop={{ custom: "-50" }} paddingBottom="18">
+            <Text
+              color={{ custom: "#D1BCBB" }}
+              size={{ custom: "50" }}
+              font={{ custom: "Instrument Serif" }}
+              align="center"
+            >
+              ......................................................................
+            </Text>
+          </Box> */}
+
+          <Box
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center"
+            alignHorizontal="center"
+          >
+            <Text
+              font={{ custom: "Instrument Serif" }}
+              size={{ custom: "48" }}
+              color={{ custom: mainForegroundColor }}
+              align="center"
+            >
+              Today's points:
+            </Text>
+            <Text
+              color={{ custom: pointsColor }}
+              size={{ custom: "82" }}
+              align="center"
+            >
+              {todayPoints}
+            </Text>
+          </Box>
+          <Box
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center"
+            alignHorizontal="center"
+          >
+            <Text
+              font={{ custom: "Instrument Serif" }}
+              size={{ custom: "48" }}
+              color={{ custom: mainForegroundColor }}
+            >
+              Total points:
+            </Text>
+            <Text color={{ custom: pointsColor }} size={{ custom: "82" }}>
+              {totalPoints}
+            </Text>
+          </Box>
+        </Box>
+        {/* <Box display="flex" position="absolute" paddingTop={{ custom: "254" }}>
+          <Image
+            src={`${baseUrl}/ham.png`}
+            height={{ custom: "700" }}
+            objectFit="contain"
+          ></Image>
+        </Box> */}
+        {/* <Box
+          display="flex"
+          flexDirection="row"
+          width={{ custom: "850" }}
+          height={{ custom: "58" }}
+          bottom={{ custom: "74" }}
+          justifyContent="space-between"
+          borderColor={{ custom: mainForegroundColor }}
+          background={{ custom: "white" }}
+          borderWidth={{ custom: "2" }}
+          borderRadius={{ custom: "50" }}
+          boxShadow={"6px 6px #E0453A"}
+        >
+          <HStack
+            alignHorizontal="center"
+            alignVertical="center"
+            gap={"4"}
+            padding={"6"}
+          >
+            <Text
+              font={{ custom: "Instrument Serif" }}
+              color={{ custom: mainForegroundColor }}
+              size={{ custom: "25" }}
+            >
+              Design by{"  "}
+            </Text>
+            <Text
+              color={{ custom: mainForegroundColor }}
+              size={{ custom: "30" }}
+            >
+              @reallyryl
+            </Text>
+          </HStack>
+          <HStack alignVertical="center" paddingTop={"8"}>
+            <Text
+              font={{ custom: "Instrument Sans" }}
+              color={{ custom: mainForegroundColor }}
+              size={{ custom: "20" }}
+            >
+              {formattedDate}
+            </Text>
+          </HStack>
+
+          <HStack
+            alignHorizontal="center"
+            alignVertical="center"
+            gap={"4"}
+            padding={"6"}
+          >
+            <Text
+              font={{ custom: "Instrument Serif" }}
+              color={{ custom: mainForegroundColor }}
+              size={{ custom: "25" }}
+            >
+              Frame by{"  "}
+            </Text>
+            <Text
+              color={{ custom: mainForegroundColor }}
+              size={{ custom: "30" }}
+            >
+              @leovido
+            </Text>
+          </HStack>
+        </Box> */}
+      </Box>
+    ),
     intents: [
       <Button value="Back" action="/">
         Back
