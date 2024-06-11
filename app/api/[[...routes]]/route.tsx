@@ -10,10 +10,7 @@ import { handle } from "frog/next";
 import { serveStatic } from "frog/serve-static";
 // @ts-ignore
 import { fetchAllPoints, fetchLiquidityMiningScore, resetRank } from "./client";
-
-export const mainForegroundColor = "#E0453A";
-export const rankColor = "#F08303";
-export const pointsColor = "#4387D7";
+import { mainForegroundColor, pointsColor, rankColor } from "./color.js";
 
 const app = new Frog({
   verify: process.env.CONFIG === "PROD",
