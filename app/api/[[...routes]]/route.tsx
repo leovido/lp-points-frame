@@ -9,12 +9,7 @@ import { neynarClient } from "./neynarClient.ts";
 import { handle } from "frog/next";
 import { serveStatic } from "frog/serve-static";
 // @ts-ignore
-import {
-  fetchAllPoints,
-  fetchLiquidityMiningScore,
-  resetRank,
-} from "./client.ts";
-// @ts-ignore
+import { fetchAllPoints, fetchLiquidityMiningScore, resetRank } from "./client";
 
 export const mainForegroundColor = "#E0453A";
 export const rankColor = "#F08303";
