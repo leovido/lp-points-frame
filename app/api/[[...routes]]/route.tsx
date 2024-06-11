@@ -316,9 +316,9 @@ app.image("/imageLP", async (c) => {
         textAlign="center"
         width="100%"
       >
-        <Box height="100%" width="100%" position="absolute">
+        {/* <Box height="100%" width="100%" position="absolute">
           <Image src={`${baseUrl}/user-bg.jpg`} objectFit="contain"></Image>
-        </Box>
+        </Box> */}
 
         <Box
           display="flex"
@@ -531,6 +531,7 @@ app.image("/imageLP", async (c) => {
     headers: {
       "Cache-Control": "max-age=0",
       "Content-Type": "image/png",
+      contentType: "image/png",
     },
   });
 });
