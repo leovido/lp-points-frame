@@ -285,7 +285,6 @@ app.frame("/check", async (c) => {
 
   const imageURL = `${process.env.NEXT_PUBLIC_URL}/api/imageLP?todayPoints=${todayPoints}&totalPoints=${totalPoints}&fid=${fid}&username=${username}&rank=${rank}`;
 
-  console.warn(imageURL, "le image");
   return c.res({
     imageOptions: {
       width: 1080,
