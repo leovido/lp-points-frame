@@ -10,6 +10,7 @@ import { handle } from "frog/next";
 import { serveStatic } from "frog/serve-static";
 // @ts-ignore
 import { fetchAllPoints, fetchLiquidityMiningScore, resetRank } from "./client";
+import { Content } from "next/font/google/index.js";
 
 export const mainForegroundColor = "#E0453A";
 export const rankColor = "#F08303";
@@ -401,7 +402,6 @@ app.frame("/check", async (c) => {
     });
   }
 
-  const formattedDate = formatDate(new Date());
   const unwrappedText = inputText !== undefined ? inputText : "";
   const fid = unwrappedText.length > 0 ? Number(unwrappedText) : frameData!.fid;
 
@@ -436,6 +436,9 @@ app.frame("/check", async (c) => {
         Back
       </Button>,
     ],
+    headers: {
+      ContentType: "image/png",
+    },
   });
 });
 
@@ -447,7 +450,11 @@ app.image("/imageLP", async (c) => {
   const imageUrl = `http://localhost:3000/og?totalPoints=${totalPoints}&todayPoints=${todayPoints}&rank=${rank}&fid=${fid}&username=${username}`;
 
   return c.res({
-    image: <Image src={imageUrl} objectFit="contain" />,
+    image: (
+      <Box display="flex">
+        <Image src={imageUrl} objectFit="contain" />
+      </Box>
+    ),
     headers: {
       "Cache-Control": "max-age=0",
     },
