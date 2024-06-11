@@ -429,7 +429,7 @@ app.frame("/check", async (c) => {
   //   (await neynarClient.fetchBulkUsers([fid])).users[0].pfp_url ?? "";
 
   return c.res({
-    image: `http://localhost:3000/api/imageLP?totalPoints=${totalPoints}&username=${username}&todayPoints=${todayPoints}&rank=${rank}&fid=${fid}`,
+    image: `${process.env.NEXT_PUBLIC_URL}/api/imageLP?totalPoints=${totalPoints}&username=${username}&todayPoints=${todayPoints}&rank=${rank}&fid=${fid}`,
     intents: [
       <Button value="Back" action="/">
         Back
@@ -447,7 +447,7 @@ app.image("/imageLP", async (c) => {
   const json = removeAmpFromKeys(reqJSON);
   const { todayPoints, totalPoints, fid, username, rank } = json;
 
-  const imageUrl = `http://localhost:3000/og?totalPoints=${totalPoints}&todayPoints=${todayPoints}&rank=${rank}&fid=${fid}&username=${username}`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_API}/og?totalPoints=${totalPoints}&todayPoints=${todayPoints}&rank=${rank}&fid=${fid}&username=${username}`;
 
   return c.res({
     image: (
