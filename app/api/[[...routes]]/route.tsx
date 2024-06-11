@@ -404,7 +404,7 @@ app.image("/imageLP", async (c) => {
             </h1>
           </Box>
 
-          <Box marginTop={{ custom: "-50" }} paddingBottom="18">
+          {/* <Box marginTop={{ custom: "-50" }} paddingBottom="18">
             <Text
               color={{ custom: "#D1BCBB" }}
               size={{ custom: "50" }}
@@ -413,7 +413,7 @@ app.image("/imageLP", async (c) => {
             >
               ......................................................................
             </Text>
-          </Box>
+          </Box> */}
 
           <Box
             flexDirection="row"
@@ -455,14 +455,14 @@ app.image("/imageLP", async (c) => {
             </Text>
           </Box>
         </Box>
-        <Box display="flex" position="absolute" paddingTop={{ custom: "254" }}>
+        {/* <Box display="flex" position="absolute" paddingTop={{ custom: "254" }}>
           <Image
             src={`${baseUrl}/ham.png`}
             height={{ custom: "700" }}
             objectFit="contain"
           ></Image>
-        </Box>
-        <Box
+        </Box> */}
+        {/* <Box
           display="flex"
           flexDirection="row"
           width={{ custom: "850" }}
@@ -525,7 +525,7 @@ app.image("/imageLP", async (c) => {
               @leovido
             </Text>
           </HStack>
-        </Box>
+        </Box> */}
       </Box>
     ),
     headers: {
