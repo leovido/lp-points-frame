@@ -89,7 +89,7 @@ export async function GET(req: NextRequest) {
             </Box>
           </Box>
 
-          <Box marginBottom={{ custom: "-25" }}>
+          <Box marginTop={{ custom: "20" }} marginBottom={{ custom: "-15" }}>
             <Text
               color={{ custom: mainForegroundColor }}
               size={{ custom: "48" }}
