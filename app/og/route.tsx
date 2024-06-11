@@ -9,7 +9,9 @@ import { Box, Image, Text, HStack, VStack } from "../api/[[...routes]]/ui";
 import { NextRequest } from "next/server";
 import fetch from "node-fetch";
 
-export async function GET(req: NextRequest) {
+export const runtime = "edge";
+
+export async function handler(req: NextRequest) {
   const baseUrl = process.env.NEXT_PUBLIC_URL;
   const { searchParams } = req.nextUrl;
 
@@ -20,16 +22,16 @@ export async function GET(req: NextRequest) {
   const totalPoints = searchParams.get("totalPoints");
 
   const fontURL = new URL(
-    `../../public/assets/InstrumentSans-Regular.otf`,
+    `${baseUrl}/assets/InstrumentSans-Regular.otf`,
     import.meta.url
   );
 
   const fontData = await fetch(fontURL).then((res) => res.arrayBuffer());
   const fontDataNerko = await fetch(
-    new URL(`../../public/assets/NerkoOne-Regular.ttf`, import.meta.url)
+    new URL(`${baseUrl}/assets/NerkoOne-Regular.ttf`, import.meta.url)
   ).then((res) => res.arrayBuffer());
   const fontDataSerif = await fetch(
-    new URL(`../../public/assets/InstrumentSerif-Regular.ttf`, import.meta.url)
+    new URL(`${baseUrl}/assets/InstrumentSerif-Regular.ttf`, import.meta.url)
   ).then((res) => res.arrayBuffer());
 
   const formattedDate = formatDate(new Date());
