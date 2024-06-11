@@ -7,11 +7,10 @@ import {
 } from "../api/[[...routes]]/route";
 import { Box, Image, Text, HStack, VStack } from "../api/[[...routes]]/ui";
 import { NextRequest } from "next/server";
-import fetch from "node-fetch";
 
 export const runtime = "edge";
 
-export async function handler(req: NextRequest) {
+export async function GET(req: NextRequest) {
   const baseUrl = process.env.NEXT_PUBLIC_URL;
   const { searchParams } = req.nextUrl;
 
