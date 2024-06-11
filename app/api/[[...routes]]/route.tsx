@@ -16,7 +16,7 @@ export const rankColor = "#F08303";
 export const pointsColor = "#4387D7";
 
 const app = new Frog({
-  verify: false,
+  verify: process.env.CONFIG === "PROD",
   assetsPath: "/",
   basePath: "/api",
   imageAspectRatio: "1:1",
@@ -360,7 +360,46 @@ app.frame("/", (c) => {
 });
 
 app.frame("/check", async (c) => {
-  const { frameData, inputText } = c;
+  const { frameData, inputText, verified } = c;
+
+  if (!verified) {
+    return c.res({
+      image: (
+        <div
+          key={"unverified-div"}
+          style={{
+            fontFamily: "Open Sans",
+            alignItems: "center",
+            backgroundColor: "white",
+            backgroundSize: "100% 100%",
+            display: "flex",
+            flexDirection: "column",
+            flexWrap: "nowrap",
+            height: "100%",
+            justifyContent: "center",
+            textAlign: "center",
+            width: "100%",
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "Nerko One",
+              fontWeight: 700,
+              fontSize: 45,
+              color: mainForegroundColor,
+            }}
+          >
+            Something went wrong
+          </p>
+        </div>
+      ),
+      intents: [
+        <Button key={"restart"} action="/">
+          Restart
+        </Button>,
+      ],
+    });
+  }
 
   const formattedDate = formatDate(new Date());
   const unwrappedText = inputText !== undefined ? inputText : "";
