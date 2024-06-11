@@ -2,6 +2,11 @@ import { LMScore, UserScore } from "./types.js";
 import { kv } from "@vercel/kv";
 
 let rank: number = 0;
+
+export const resetRank = () => {
+  rank = 0;
+};
+
 export const fetchLiquidityMiningScore = async (
   page: number,
   wallets: string[]

@@ -9,7 +9,11 @@ import { neynarClient } from "./neynarClient.ts";
 import { handle } from "frog/next";
 import { serveStatic } from "frog/serve-static";
 // @ts-ignore
-import { fetchAllPoints, fetchLiquidityMiningScore } from "./client.ts";
+import {
+  fetchAllPoints,
+  fetchLiquidityMiningScore,
+  resetRank,
+} from "./client.ts";
 // @ts-ignore
 
 export const mainForegroundColor = "#E0453A";
@@ -222,14 +226,7 @@ export const userView = (
         ......................................................................
       </Text>
 
-      {/* <p
-        style={{
-          fontFamily: "Instrument Serif",
-          marginTop: -60,
-          marginBottom: -40,
-        }}
-      ></p> */}
-      <HStack alignHorizontal="space-between" alignVertical="center">
+      <HStack alignHorizontal="center" alignVertical="center">
         <Text font={{ custom: "Instrument Serif" }} size={"48"}>
           Todays points
         </Text>
@@ -237,7 +234,7 @@ export const userView = (
           {todayPoints}
         </Text>
       </HStack>
-      <HStack alignHorizontal="space-between" alignVertical="center">
+      <HStack alignHorizontal="center" alignVertical="center">
         <Text font={{ custom: "Instrument Serif" }} size={"48"}>
           Total points
         </Text>
@@ -394,6 +391,7 @@ app.frame("/check", async (c) => {
     }) ?? "N/A";
   const rank = liqResponse?.rank.toString() ?? "N/A";
 
+  resetRank();
   // const pfpURL =
   //   (await neynarClient.fetchBulkUsers([fid])).users[0].pfp_url ?? "";
 

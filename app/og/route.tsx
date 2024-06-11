@@ -144,30 +144,45 @@ export async function GET(req: NextRequest) {
             </Text>
           </Box>
 
-          <HStack alignHorizontal="space-between" alignVertical="center">
+          <Box
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center"
+            alignHorizontal="center"
+          >
             <Text
               font={{ custom: "Instrument Serif" }}
               size={{ custom: "48" }}
               color={{ custom: mainForegroundColor }}
+              align="center"
             >
-              Todays points
+              Today's points:
             </Text>
-            <Text color={{ custom: pointsColor }} size={{ custom: "82" }}>
+            <Text
+              color={{ custom: pointsColor }}
+              size={{ custom: "82" }}
+              align="center"
+            >
               {todayPoints}
             </Text>
-          </HStack>
-          <HStack alignHorizontal="space-between" alignVertical="center">
+          </Box>
+          <Box
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center"
+            alignHorizontal="center"
+          >
             <Text
               font={{ custom: "Instrument Serif" }}
               size={{ custom: "48" }}
               color={{ custom: mainForegroundColor }}
             >
-              Total points
+              Total points:
             </Text>
             <Text color={{ custom: pointsColor }} size={{ custom: "82" }}>
               {totalPoints}
             </Text>
-          </HStack>
+          </Box>
         </Box>
         <Box display="flex" position="absolute" paddingTop={{ custom: "254" }}>
           <Image
