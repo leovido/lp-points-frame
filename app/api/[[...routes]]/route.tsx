@@ -10,7 +10,6 @@ import { handle } from "frog/next";
 import { serveStatic } from "frog/serve-static";
 // @ts-ignore
 import { fetchAllPoints, fetchLiquidityMiningScore, resetRank } from "./client";
-import { Content } from "next/font/google/index.js";
 
 export const mainForegroundColor = "#E0453A";
 export const rankColor = "#F08303";
@@ -438,6 +437,7 @@ app.frame("/check", async (c) => {
     ],
     headers: {
       ContentType: "image/png",
+      "Content-Type": "image/png",
     },
   });
 });
@@ -457,6 +457,7 @@ app.image("/imageLP", async (c) => {
     ),
     headers: {
       "Cache-Control": "max-age=0",
+      "Content-Type": "image/png",
     },
   });
 });
