@@ -1,12 +1,12 @@
 import { ImageResponse } from "@vercel/og";
+import { formatDate } from "../api/[[...routes]]/route";
+import { Box, Image, Text, HStack, VStack } from "../api/[[...routes]]/ui";
+import { NextRequest } from "next/server";
 import {
-  formatDate,
   mainForegroundColor,
   pointsColor,
   rankColor,
-} from "../api/[[...routes]]/route";
-import { Box, Image, Text, HStack, VStack } from "../api/[[...routes]]/ui";
-import { NextRequest } from "next/server";
+} from "../api/[[...routes]]/color";
 
 export const runtime = "edge";
 
