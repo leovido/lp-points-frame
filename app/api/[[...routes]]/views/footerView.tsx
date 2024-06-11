@@ -1,4 +1,4 @@
-import { mainForegroundColor } from "../route";
+import { mainForegroundColor } from "../color";
 import { Box } from "../ui";
 import { ImageResponse } from "@vercel/og";
 
