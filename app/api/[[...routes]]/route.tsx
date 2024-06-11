@@ -11,7 +11,7 @@ import { serveStatic } from "frog/serve-static";
 // @ts-ignore
 import { fetchAllPoints, fetchLiquidityMiningScore, resetRank } from "./client";
 import { mainForegroundColor, pointsColor, rankColor } from "./color";
-import { formatDate } from "./helpers.js";
+import { formatDate } from "./helpers";
 
 const app = new Frog({
   verify: process.env.CONFIG === "PROD",
