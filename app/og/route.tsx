@@ -55,10 +55,6 @@ export async function GET(req: NextRequest) {
           <Image src={`${baseUrl}/lines.png`} objectFit="contain"></Image>
         </Box>
 
-        <Box display="flex" position="absolute">
-          <Image src={`${baseUrl}/vectors2.png`} objectFit="contain"></Image>
-        </Box>
-
         <Box paddingTop={"20"}>
           <h1
             style={{
