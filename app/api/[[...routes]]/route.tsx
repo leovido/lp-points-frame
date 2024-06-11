@@ -397,14 +397,6 @@ app.frame("/check", async (c) => {
   // const pfpURL =
   //   (await neynarClient.fetchBulkUsers([fid])).users[0].pfp_url ?? "";
 
-  const params = new URLSearchParams({
-    totalPoints: totalPoints,
-    todayPoints: todayPoints,
-    rank: rank,
-    fid: fid.toString(),
-    username: username,
-  });
-
   return c.res({
     image: `http://localhost:3000/api/imageLP?totalPoints=${totalPoints}&username=${username}&todayPoints=${todayPoints}&rank=${rank}&fid=${fid}`,
     intents: [
