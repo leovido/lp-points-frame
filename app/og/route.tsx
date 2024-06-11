@@ -20,16 +20,16 @@ export async function GET(req: NextRequest) {
   const totalPoints = searchParams.get("totalPoints");
 
   const fontURL = new URL(
-    `../../assets/InstrumentSans-Regular.otf`,
+    `../../public/assets/InstrumentSans-Regular.otf`,
     import.meta.url
   );
 
   const fontData = await fetch(fontURL).then((res) => res.arrayBuffer());
   const fontDataNerko = await fetch(
-    new URL(`../../assets/NerkoOne-Regular.ttf`, import.meta.url)
+    new URL(`../../public/assets/NerkoOne-Regular.ttf`, import.meta.url)
   ).then((res) => res.arrayBuffer());
   const fontDataSerif = await fetch(
-    new URL(`../../assets/InstrumentSerif-Regular.ttf`, import.meta.url)
+    new URL(`../../public/assets/InstrumentSerif-Regular.ttf`, import.meta.url)
   ).then((res) => res.arrayBuffer());
 
   const formattedDate = formatDate(new Date());
