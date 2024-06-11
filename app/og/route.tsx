@@ -45,31 +45,8 @@ export async function GET(req: NextRequest) {
         textAlign="center"
         width="100%"
       >
-        <Box
-          display="flex"
-          position="absolute"
-          background={{ custom: "white" }}
-          borderColor={{ custom: mainForegroundColor }}
-          borderWidth={{ custom: "20" }}
-        >
-          <Image src={`${baseUrl}/lines.png`} objectFit="contain"></Image>
-        </Box>
-
-        <Box paddingTop={"20"}>
-          <h1
-            style={{
-              color: "white",
-              fontSize: 100,
-              background: mainForegroundColor,
-              paddingTop: 8,
-              paddingBottom: 8,
-              paddingLeft: 32,
-              paddingRight: 32,
-              borderRadius: 120,
-            }}
-          >
-            TN100x LP Points
-          </h1>
+        <Box height="100%" width="100%" position="absolute">
+          <Image src={`${baseUrl}/user-bg.jpg`} objectFit="contain"></Image>
         </Box>
 
         <Box
@@ -84,8 +61,7 @@ export async function GET(req: NextRequest) {
           boxShadow={"6px 6px #E0453A"}
           paddingLeft={"32"}
           paddingRight={"32"}
-          paddingTop={"16"}
-          marginTop={{ custom: "-100" }}
+          marginTop={{ custom: "300" }}
         >
           <Box
             position="absolute"
