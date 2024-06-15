@@ -4,17 +4,21 @@ import { Button, Frog, TextInput } from "frog";
 import { devtools } from "frog/dev";
 // @ts-ignore
 import { Box, HStack, Image, Text, VStack } from "./ui.js";
-// @ts-ignore
-import { neynarClient } from "./neynarClient.ts";
-import { handle } from "frog/next";
 import { serveStatic } from "frog/serve-static";
 // @ts-ignore
-import { fetchAllPoints, fetchLiquidityMiningScore, resetRank } from "./client";
 import { mainForegroundColor, pointsColor, rankColor } from "./color";
-import { formatDate } from "./helpers";
+import { formatDate, getUserPoints } from "./helpers";
+import { handle } from "frog/next";
 
-const app = new Frog({
+interface State {
+  isImageReady: boolean;
+}
+
+const app = new Frog<{ State: State }>({
   verify: process.env.CONFIG === "PROD",
+  initialState: {
+    isImageReady: false,
+  },
   assetsPath: "/",
   basePath: "/api",
   imageAspectRatio: "1:1",
@@ -215,7 +219,7 @@ app.frame("/", (c) => {
 });
 
 app.frame("/check", async (c) => {
-  const { frameData, inputText, verified } = c;
+  const { frameData, inputText, verified, deriveState } = c;
 
   if (!verified) {
     return c.res({
@@ -259,31 +263,18 @@ app.frame("/check", async (c) => {
   const unwrappedText = inputText !== undefined ? inputText : "";
   const fid = unwrappedText.length > 0 ? Number(unwrappedText) : frameData!.fid;
 
-  const user = (await neynarClient.fetchBulkUsers([fid])).users[0];
-  const username = user.username;
-  const custodyAddress = user.verified_addresses.eth_addresses;
-  const liqResponse = await fetchLiquidityMiningScore(1, custodyAddress);
+  const { username, totalPoints, todayPoints, rank } = await getUserPoints(fid);
+  const imageLP = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/imageLP?todayPoints=${todayPoints}&totalPoints=${totalPoints}&fid=${fid}&username=${username}&rank=${rank}`
+  );
 
-  const _totalPoints = liqResponse?.score ?? 0;
+  const state = deriveState((previousState) => {
+    imageLP.statusText === "OK" && previousState.isImageReady;
+  });
+  const imageURL = `${process.env.NEXT_PUBLIC_URL}/api/imageLP?todayPoints=${todayPoints}&totalPoints=${totalPoints}&fid=${fid}&username=${username}&rank=${rank}`;
 
-  const { totalPoints: newTotalPoints, todayPoints: newTodaysPoints } =
-    await fetchAllPoints(fid, _totalPoints);
-
-  const totalPoints =
-    newTotalPoints.toLocaleString("en-US", {
-      maximumFractionDigits: 0,
-    }) ?? "N/A";
-  const todayPoints =
-    newTodaysPoints.toLocaleString("en-US", {
-      maximumFractionDigits: 0,
-    }) ?? "N/A";
-  const rank = liqResponse?.rank.toString() ?? "N/A";
-
-  resetRank();
   // const pfpURL =
   //   (await neynarClient.fetchBulkUsers([fid])).users[0].pfp_url ?? "";
-
-  const imageURL = `${process.env.NEXT_PUBLIC_URL}/api/imageLP?todayPoints=${todayPoints}&totalPoints=${totalPoints}&fid=${fid}&username=${username}&rank=${rank}`;
 
   return c.res({
     imageOptions: {
@@ -292,15 +283,15 @@ app.frame("/check", async (c) => {
     },
     image: (
       <Box display="flex">
-        <Image
-          src={imageURL}
-          width={"256"}
-          height={"256"}
-          objectFit="contain"
-        />
+        <Image src={imageURL} objectFit="contain" />
       </Box>
     ),
     intents: [
+      !state.isImageReady && (
+        <Button value="refresh" action="/check">
+          Refresh
+        </Button>
+      ),
       <Button value="Back" action="/">
         Back
       </Button>,
@@ -336,7 +327,7 @@ app.image("/imageLP", async (c) => {
           <Image src={`${baseUrl}/user-bg.jpg`} objectFit="contain"></Image>
         </Box>
 
-        {/* <Box
+        <Box
           display="flex"
           flexDirection="column"
           width={{ custom: "857" }}
@@ -477,7 +468,7 @@ app.image("/imageLP", async (c) => {
             height={{ custom: "700" }}
             objectFit="contain"
           ></Image>
-        </Box> */}
+        </Box>
         <Box
           display="flex"
           flexDirection="row"

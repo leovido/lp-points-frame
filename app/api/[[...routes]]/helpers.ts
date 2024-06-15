@@ -82,6 +82,9 @@
 //         </h1>
 //       </Box>
 
+import { fetchAllPoints, fetchLiquidityMiningScore, resetRank } from "./client";
+import { neynarClient } from "./neynarClient";
+
 //       <Text
 //         color={{ custom: "#D1BCBB" }}
 //         size={{ custom: "50" }}
@@ -140,4 +143,31 @@ export const formatDate = (date: Date) => {
     .replace(/^(\d{2}):(\d{2}):(\d{2})$/, "$1:$2");
 
   return `${formattedDate}, ${formattedTime} UTC`;
+};
+
+export const getUserPoints = async (fid: number) => {
+  const userResponse = await neynarClient.fetchBulkUsers([fid]);
+  const user = userResponse.users[0];
+  const username = user.username;
+  const custodyAddress = user.verified_addresses.eth_addresses;
+  const liqResponse = await fetchLiquidityMiningScore(1, custodyAddress);
+
+  const _totalPoints = liqResponse?.score ?? 0;
+
+  const { totalPoints: newTotalPoints, todayPoints: newTodaysPoints } =
+    await fetchAllPoints(fid, _totalPoints);
+
+  const totalPoints =
+    newTotalPoints.toLocaleString("en-US", {
+      maximumFractionDigits: 0,
+    }) ?? "N/A";
+  const todayPoints =
+    newTodaysPoints.toLocaleString("en-US", {
+      maximumFractionDigits: 0,
+    }) ?? "N/A";
+  const rank = liqResponse?.rank.toString() ?? "N/A";
+
+  resetRank();
+
+  return { username, totalPoints, todayPoints, rank };
 };
