@@ -336,7 +336,7 @@ app.image("/imageLP", async (c) => {
           <Image src={`${baseUrl}/user-bg.jpg`} objectFit="contain"></Image>
         </Box>
 
-        <Box
+        {/* <Box
           display="flex"
           flexDirection="column"
           width={{ custom: "857" }}
@@ -477,7 +477,7 @@ app.image("/imageLP", async (c) => {
             height={{ custom: "700" }}
             objectFit="contain"
           ></Image>
-        </Box>
+        </Box> */}
         <Box
           display="flex"
           flexDirection="row"
