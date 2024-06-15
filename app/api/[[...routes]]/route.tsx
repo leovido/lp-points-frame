@@ -322,10 +322,28 @@ app.image("/imageLP", async (c) => {
         height="100%"
         textAlign="center"
         width="100%"
+        borderColor={{ custom: mainForegroundColor }}
+        borderWidth={{ custom: "20" }}
       >
-        <Box height="100%" width="100%" position="absolute">
+        {/* <Box height="100%" width="100%" position="absolute">
           <Image src={`${baseUrl}/user-bg.jpg`} objectFit="contain"></Image>
-        </Box>
+        </Box> */}
+
+        <h1
+          style={{
+            color: "white",
+            fontSize: 100,
+            background: mainForegroundColor,
+            marginTop: 50,
+            paddingTop: 8,
+            paddingBottom: 8,
+            paddingLeft: 32,
+            paddingRight: 32,
+            borderRadius: 120,
+          }}
+        >
+          TN100x LP Points
+        </h1>
 
         <Box
           display="flex"
@@ -337,9 +355,9 @@ app.image("/imageLP", async (c) => {
           borderWidth={{ custom: "2" }}
           borderRadius={{ custom: "50" }}
           boxShadow={"6px 6px #E0453A"}
+          marginBottom={{ custom: "80" }}
           paddingLeft={"32"}
           paddingRight={"32"}
-          marginTop={{ custom: "300" }}
         >
           <Box
             position="absolute"
@@ -462,7 +480,7 @@ app.image("/imageLP", async (c) => {
             </Text>
           </Box>
         </Box>
-        <Box display="flex" position="absolute" paddingTop={{ custom: "254" }}>
+        <Box display="flex" position="absolute" paddingTop={{ custom: "200" }}>
           <Image
             src={`${baseUrl}/ham.png`}
             height={{ custom: "700" }}
