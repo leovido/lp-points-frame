@@ -329,7 +329,7 @@ app.image("/imageLP", async (c) => {
           <Image src={`${baseUrl}/user-bg.jpg`} objectFit="contain"></Image>
         </Box> */}
 
-        <h1
+        {/* <h1
           style={{
             color: "white",
             fontSize: 100,
@@ -343,7 +343,7 @@ app.image("/imageLP", async (c) => {
           }}
         >
           TN100x LP Points
-        </h1>
+        </h1> */}
 
         <Box
           display="flex"
