@@ -30,6 +30,7 @@ export const fetchLiquidityMiningScore = async (
 
     if (foundUser === undefined) {
       if (page === json.totalPages) {
+        console.warn("nothing here");
         return undefined;
       }
       rank += json.data.length;

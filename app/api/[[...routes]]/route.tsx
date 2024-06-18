@@ -15,7 +15,7 @@ interface State {
 }
 
 const app = new Frog<{ State: State }>({
-  verify: process.env.CONFIG === "PROD",
+  verify: false,
   initialState: {
     isImageReady: false,
   },
@@ -23,8 +23,6 @@ const app = new Frog<{ State: State }>({
   basePath: "/api",
   imageAspectRatio: "1:1",
   imageOptions: {
-    height: 1080,
-    width: 1080,
     fonts: [
       {
         name: "Nerko One",
@@ -59,65 +57,49 @@ const footerView = (formattedDate: string) => (
   <Box
     display="flex"
     flexDirection="row"
-    width={{ custom: "850" }}
-    height={{ custom: "58" }}
-    bottom={{ custom: "74" }}
+    width={{ custom: "520" }}
+    height={{ custom: "33" }}
+    bottom={{ custom: "44" }}
+    alignHorizontal="center"
+    alignVertical="center"
     position="absolute"
-    alignItems="center"
     justifyContent="space-around"
-    textAlign="center"
     borderColor={{ custom: mainForegroundColor }}
     background={{ custom: "white" }}
     borderWidth={{ custom: "2" }}
     borderRadius={{ custom: "50" }}
-    boxShadow={"6px 6px #E0453A"}
+    boxShadow="3px 3px #E0453A"
   >
-    <Box flexDirection="row" alignItems="center">
-      <h6
-        style={{
-          fontFamily: "Instrument Serif",
-          color: mainForegroundColor,
-          fontSize: 25,
-        }}
+    <Box display="flex" flexDirection="row">
+      <Text
+        font={{ custom: "Instrument Serif" }}
+        color={{ custom: mainForegroundColor }}
+        size={{ custom: "15" }}
       >
         Design by{"  "}
-      </h6>
-      <h6
-        style={{
-          color: mainForegroundColor,
-          fontSize: 30,
-        }}
-      >
+      </Text>
+      <Text color={{ custom: mainForegroundColor }} size={"20"}>
         @reallyryl
-      </h6>
+      </Text>
     </Box>
-    <h6
-      style={{
-        fontFamily: "Instrument Sans",
-        color: mainForegroundColor,
-        fontSize: 20,
-      }}
+    <Text
+      font={{ custom: "Instrument Sans" }}
+      color={{ custom: mainForegroundColor }}
+      size={{ custom: "12" }}
     >
       {formattedDate}
-    </h6>
-    <Box flexDirection="row" alignItems="center">
-      <h6
-        style={{
-          fontFamily: "Instrument Serif",
-          color: mainForegroundColor,
-          fontSize: 25,
-        }}
+    </Text>
+    <Box display="flex" flexDirection="row">
+      <Text
+        font={{ custom: "Instrument Serif" }}
+        color={{ custom: mainForegroundColor }}
+        size={{ custom: "15" }}
       >
         Frame by{"  "}
-      </h6>
-      <h6
-        style={{
-          color: mainForegroundColor,
-          fontSize: 30,
-        }}
-      >
+      </Text>
+      <Text color={{ custom: mainForegroundColor }} size={"20"}>
         @leovido
-      </h6>
+      </Text>
     </Box>
   </Box>
 );
@@ -143,9 +125,11 @@ app.frame("/", (c) => {
         <Box
           display="flex"
           position="absolute"
+          width={{ custom: "53%" }}
+          height={"100%"}
           background={{ custom: "white" }}
           borderColor={{ custom: mainForegroundColor }}
-          borderWidth={{ custom: "20" }}
+          borderWidth={{ custom: "15" }}
         >
           <Image
             src="/lines.png"
@@ -157,20 +141,20 @@ app.frame("/", (c) => {
         <Box display="flex" position="absolute">
           <Image
             src="/vectors2.png"
-            width="256"
-            height="256"
-            objectFit="contain"
+            width={{ custom: "800" }}
+            height={{ custom: "800" }}
+            objectFit="cover"
           ></Image>
         </Box>
 
         <h1
           style={{
             color: "white",
-            fontSize: 100,
+            fontSize: 50,
             background: mainForegroundColor,
-            marginTop: 246,
-            paddingTop: 8,
-            paddingBottom: 8,
+            marginTop: 130,
+            paddingTop: 4,
+            paddingBottom: 4,
             paddingLeft: 32,
             paddingRight: 32,
             borderRadius: 120,
@@ -180,33 +164,33 @@ app.frame("/", (c) => {
         </h1>
         <h1
           style={{
-            fontSize: 82,
+            fontSize: 42,
             color: mainForegroundColor,
-            width: "856",
-            height: "319",
+            width: "480",
+            height: "190",
             background: "white",
             borderColor: mainForegroundColor,
-            borderRadius: 30,
+            borderRadius: 15,
             borderWidth: 2,
-            paddingLeft: 80,
-            paddingRight: 80,
-            paddingTop: 8,
-            paddingBottom: 8,
-            boxShadow: "6px 6px #E0453A",
+            paddingLeft: 70,
+            paddingRight: 70,
+            paddingTop: 20,
+            paddingBottom: 20,
+            boxShadow: "3px 3px #E0453A",
           }}
         >
           Check your TN100x LP points from this frame
         </h1>
 
-        {footerView(formattedDate)}
         <Box display="flex" position="absolute">
           <Image
             src="/floaties.png"
-            width="256"
-            height="256"
+            width={{ custom: "600" }}
+            height={{ custom: "600" }}
             objectFit="contain"
           ></Image>
         </Box>
+        {footerView(formattedDate)}
       </Box>
     ),
     intents: [
@@ -221,49 +205,51 @@ app.frame("/", (c) => {
 app.frame("/check", async (c) => {
   const { frameData, inputText, verified, deriveState } = c;
 
-  if (!verified) {
-    return c.res({
-      image: (
-        <div
-          key={"unverified-div"}
-          style={{
-            fontFamily: "Open Sans",
-            alignItems: "center",
-            backgroundColor: "white",
-            backgroundSize: "100% 100%",
-            display: "flex",
-            flexDirection: "column",
-            flexWrap: "nowrap",
-            height: "100%",
-            justifyContent: "center",
-            textAlign: "center",
-            width: "100%",
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "Nerko One",
-              fontWeight: 700,
-              fontSize: 45,
-              color: mainForegroundColor,
-            }}
-          >
-            Something went wrong
-          </p>
-        </div>
-      ),
-      intents: [
-        <Button key={"restart"} action="/">
-          Restart
-        </Button>,
-      ],
-    });
-  }
+  // if (!verified) {
+  //   return c.res({
+  //     image: (
+  //       <div
+  //         key={"unverified-div"}
+  //         style={{
+  //           fontFamily: "Open Sans",
+  //           alignItems: "center",
+  //           backgroundColor: "white",
+  //           backgroundSize: "100% 100%",
+  //           display: "flex",
+  //           flexDirection: "column",
+  //           flexWrap: "nowrap",
+  //           height: "100%",
+  //           justifyContent: "center",
+  //           textAlign: "center",
+  //           width: "100%",
+  //         }}
+  //       >
+  //         <p
+  //           style={{
+  //             fontFamily: "Nerko One",
+  //             fontWeight: 700,
+  //             fontSize: 45,
+  //             color: mainForegroundColor,
+  //           }}
+  //         >
+  //           Something went wrong
+  //         </p>
+  //       </div>
+  //     ),
+  //     intents: [
+  //       <Button key={"restart"} action="/">
+  //         Restart
+  //       </Button>,
+  //     ],
+  //   });
+  // }
 
   const unwrappedText = inputText !== undefined ? inputText : "";
   const fid = unwrappedText.length > 0 ? Number(unwrappedText) : frameData!.fid;
 
   const { username, totalPoints, todayPoints, rank } = await getUserPoints(fid);
+  console.warn("does it get here");
+
   const imageLP = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/imageLP?todayPoints=${todayPoints}&totalPoints=${totalPoints}&fid=${fid}&username=${username}&rank=${rank}`
   );
@@ -277,10 +263,7 @@ app.frame("/check", async (c) => {
   //   (await neynarClient.fetchBulkUsers([fid])).users[0].pfp_url ?? "";
 
   return c.res({
-    imageOptions: {
-      width: 1080,
-      height: 1080,
-    },
+    imageAspectRatio: "1:1",
     image: (
       <Box display="flex">
         <Image src={imageURL} objectFit="contain" />
@@ -325,11 +308,10 @@ app.image("/imageLP", async (c) => {
         borderColor={{ custom: mainForegroundColor }}
         borderWidth={{ custom: "20" }}
       >
-        {/* <Box height="100%" width="100%" position="absolute">
+        <Box height="100%" width="100%" position="absolute">
           <Image src={`${baseUrl}/user-bg.jpg`} objectFit="contain"></Image>
-        </Box> */}
-
-        {/* <h1
+        </Box>
+        <h1
           style={{
             color: "white",
             fontSize: 100,
@@ -343,7 +325,7 @@ app.image("/imageLP", async (c) => {
           }}
         >
           TN100x LP Points
-        </h1> */}
+        </h1>
 
         <Box
           display="flex"

@@ -146,28 +146,37 @@ export const formatDate = (date: Date) => {
 };
 
 export const getUserPoints = async (fid: number) => {
-  const userResponse = await neynarClient.fetchBulkUsers([fid]);
-  const user = userResponse.users[0];
-  const username = user.username;
-  const custodyAddress = user.verified_addresses.eth_addresses;
-  const liqResponse = await fetchLiquidityMiningScore(1, custodyAddress);
+  try {
+    console.warn("before");
+    const userResponse = await neynarClient.fetchBulkUsers([fid]);
+    const user = userResponse.users[0];
+    const username = user.username;
+    const custodyAddress = user.verified_addresses.eth_addresses;
+    console.warn("inside!");
 
-  const _totalPoints = liqResponse?.score ?? 0;
+    const liqResponse = await fetchLiquidityMiningScore(1, custodyAddress);
 
-  const { totalPoints: newTotalPoints, todayPoints: newTodaysPoints } =
-    await fetchAllPoints(fid, _totalPoints);
+    const _totalPoints = liqResponse?.score ?? 0;
 
-  const totalPoints =
-    newTotalPoints.toLocaleString("en-US", {
-      maximumFractionDigits: 0,
-    }) ?? "N/A";
-  const todayPoints =
-    newTodaysPoints.toLocaleString("en-US", {
-      maximumFractionDigits: 0,
-    }) ?? "N/A";
-  const rank = liqResponse?.rank.toString() ?? "N/A";
+    const { totalPoints: newTotalPoints, todayPoints: newTodaysPoints } =
+      await fetchAllPoints(fid, _totalPoints);
 
-  resetRank();
+    const totalPoints =
+      newTotalPoints.toLocaleString("en-US", {
+        maximumFractionDigits: 0,
+      }) ?? "N/A";
+    const todayPoints =
+      newTodaysPoints.toLocaleString("en-US", {
+        maximumFractionDigits: 0,
+      }) ?? "N/A";
+    const rank = liqResponse?.rank.toString() ?? "N/A";
 
-  return { username, totalPoints, todayPoints, rank };
+    resetRank();
+
+    return { username, totalPoints, todayPoints, rank };
+  } catch (error) {
+    console.error(error);
+
+    throw error;
+  }
 };
