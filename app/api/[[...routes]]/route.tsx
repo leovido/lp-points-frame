@@ -482,7 +482,7 @@ app.image("/imageLP", async (c) => {
         </Box>
         <Box display="flex" position="absolute" paddingTop={{ custom: "200" }}>
           <Image
-            src={`${baseUrl}/ham.png`}
+            src={"/ham.png"}
             height={{ custom: "700" }}
             objectFit="contain"
           ></Image>
